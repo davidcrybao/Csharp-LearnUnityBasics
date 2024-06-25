@@ -182,19 +182,10 @@ while (true)
                         }
                         break;
                     case ConsoleKey.Q:
-                        if (playerX == enemyX)
+                        if ((playerX == enemyX && MathF.Abs(playerY - enemyY) == 1) ||
+     (playerY == enemyY && MathF.Abs(playerX - enemyX) == 2))
                         {
-                            if (MathF.Abs(playerY - enemyY) == 1)
-                            {
-                                Console.WriteLine("开始战斗");
-                            }
-                        }
-                        else if (playerY == enemyY)
-                        {
-                            if (MathF.Abs(playerX - enemyX) == 2)
-                            {
-                                Console.WriteLine("开始战斗");
-                            }
+                            Console.WriteLine("开始战斗");
                         }
 
 
