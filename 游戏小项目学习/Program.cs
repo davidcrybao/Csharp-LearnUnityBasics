@@ -15,15 +15,12 @@ Console.SetCursorPosition(xPosition, zPosition - 3);
 Console.WriteLine(title);
 xPosition = GetCharCount("开始游戏");
 
-
 int index = 0;
-
 
 while (true)
 {
     switch (currentSceneID)
     {
-
         case 0:
 
             while (true)
@@ -36,16 +33,17 @@ while (true)
                 Console.ForegroundColor = index == 1 ? ConsoleColor.Red : ConsoleColor.White;
                 Console.WriteLine("结束游戏");
 
-
                 ConsoleKey input = Console.ReadKey(true).Key;
                 switch (input)
                 {
                     case ConsoleKey.W:
                         index = 0;
                         break;
+
                     case ConsoleKey.S:
                         index = 1;
                         break;
+
                     case ConsoleKey.E:
 
                         if (index == 0)
@@ -67,20 +65,22 @@ while (true)
                 }
             }
             break;
+
         case 1:
             Console.Clear();
             Random randomPosition = new Random();
             int enemyX = randomPosition.Next(1, 24) * 2;
             int enemyY = randomPosition.Next(1, 14) * 2;
-            int x = 2;
-            int y = 2;
+            int playerX = 2;
+            int playerY = 2;
             bool generateWallAndEnemy = false;
 
             while (true)
             {
+                #region 敌人和围墙的生成
+
                 if (!generateWallAndEnemy)
                 {
-
                     Console.ForegroundColor = ConsoleColor.Red;
                     for (int i = 0; i < height; i++)
                     {
@@ -105,78 +105,87 @@ while (true)
                              Console.WriteLine("■");
                          }*/
 
-                    Console.SetCursorPosition(enemyY, enemyY);
+                    Console.SetCursorPosition(enemyX, enemyY);
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("◆");
-
                 }
                 generateWallAndEnemy = true;
+
+                #endregion 敌人和围墙的生成
+
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.SetCursorPosition(x, y);
+                Console.SetCursorPosition(playerX, playerY);
                 Console.Write("◆");
                 ConsoleKey input = Console.ReadKey(true).Key;
 
-                Console.SetCursorPosition(x, y);
+                Console.SetCursorPosition(playerX, playerY);
                 Console.Write("  ");
 
-
+                #region 玩家移动代码 检测敌人
                 switch (input)
                 {
                     case ConsoleKey.W:
-                        if (y <= 2)
+                        playerY--;
+                        if (playerY < 1)
                         {
-                            y = 2;
-                            break;
+                            playerY = 1;
                         }
-                        if (x != xPosition)
+                        else if (playerX == enemyX && playerY == enemyY)
                         {
-                            y--;
+                            playerY++;
                         }
-                        else
-                        {
-                            y = Math.Abs(y - enemyY) > 2 ? y - 1 : y;
-                        }
+
                         break;
+
                     case ConsoleKey.S:
-                        if (y >= 27)
+                        playerY++;
+                        if (playerY > 28)
                         {
-                            y = 27;
-                            break;
+                            playerY = 28;
                         }
-                        y++;
+                        else if (playerX == enemyX && playerY == enemyY)
+                        {
+                            playerY--;
+                        }
+
                         break;
+
                     case ConsoleKey.A:
-                        if (x <= 2)
+                        playerX -= 2;
+                        if (playerX < 2)
                         {
-                            x = 2;
-                            break;
+                            playerX = 2;
                         }
-                        x = x - 2;
+                        else if (playerX == enemyX && playerY == enemyY)
+                        {
+                            playerX += 2;
+                        }
                         break;
+
                     case ConsoleKey.D:
-                        if (x >= 46)
+                        playerX += 2;
+                        if (playerX >= 46)
                         {
-                            x = 46;
-                            break;
+                            playerX = 46;
                         }
-                        x = x + 2;
+                        else if (playerX == enemyX && playerY == enemyY)
+                        {
+                            playerX -= 2;
+                        }
                         break;
                 }
-
-
+                #endregion
             }
 
-
             break;
+
         case 2:
             break;
     }
 }
 
-
 /*bool CanWalk(ConsoleKey consoleKey,int positionX,int positionY)
 {
-
     switch (consoleKey)
     {
         case ConsoleKey.W:
@@ -187,6 +196,7 @@ while (true)
             }
             y--;
             break;
+
         case ConsoleKey.S:
             if (y >= 27)
             {
@@ -195,6 +205,7 @@ while (true)
             }
             y++;
             break;
+
         case ConsoleKey.A:
             if (x <= 2)
             {
@@ -203,6 +214,7 @@ while (true)
             }
             x = x - 2;
             break;
+
         case ConsoleKey.D:
             if (x >= 46)
             {
