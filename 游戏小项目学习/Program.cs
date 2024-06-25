@@ -23,6 +23,7 @@ while (true)
     {
         case 0:
 
+            #region 开始游戏界面
             while (true)
             {
                 bool isSceneOver = false;
@@ -65,12 +66,19 @@ while (true)
                 }
             }
             break;
-
+        #endregion
         case 1:
             Console.Clear();
             Random randomPosition = new Random();
             int enemyX = randomPosition.Next(1, 24) * 2;
             int enemyY = randomPosition.Next(1, 14) * 2;
+            int enemyHP = 100;
+            int enemyAttackMax = 15;
+            int enemyAttackMin = 9;
+            int playerAttackMin = 8;
+            int playerAttackMax = 13;
+            int playerHP = 150;
+
             int playerX = 2;
             int playerY = 2;
             bool generateWallAndEnemy = false;
@@ -172,6 +180,24 @@ while (true)
                         {
                             playerX -= 2;
                         }
+                        break;
+                    case ConsoleKey.Q:
+                        if (playerX == enemyX)
+                        {
+                            if (MathF.Abs(playerY - enemyY) == 1)
+                            {
+                                Console.WriteLine("开始战斗");
+                            }
+                        }
+                        else if (playerY == enemyY)
+                        {
+                            if (MathF.Abs(playerX - enemyX) == 2)
+                            {
+                                Console.WriteLine("开始战斗");
+                            }
+                        }
+
+
                         break;
                 }
                 #endregion
