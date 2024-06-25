@@ -69,44 +69,103 @@ while (true)
             break;
         case 1:
             Console.Clear();
+            Random randomPosition = new Random();
+            int enemyX = randomPosition.Next(1, 24) * 2;
+            int enemyY = randomPosition.Next(1, 14) * 2;
+            int x = 2;
+            int y = 2;
+            bool generateWallAndEnemy = false;
 
             while (true)
             {
-                height = 25;
-                bool isWallGenerated = false;
-                if (!isWallGenerated)
+                if (!generateWallAndEnemy)
                 {
-                    Console.SetCursorPosition(0, 0);
-                    for (int i = 0; i < height + 7; i++)
+
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    for (int i = 0; i < height; i++)
                     {
-                        Console.WriteLine();
-                        for (int j = 0; j < height; j++)
-                        {
-                            if (j == 0 || j == height - 1)
-                            {
-                                Console.Write("■");
-                            }
-                            else
-                            {
-                                if (i == 0 || i == height + 2 || i == height + 6)
-                                {
-                                    Console.Write("■");
-                                }
-                                else
-                                {
-                                    Console.Write("  ");
-                                }
-
-                            }
-                        }
-
+                        Console.SetCursorPosition(0, i);
+                        Console.Write("■");
+                        Console.SetCursorPosition(width - 2, i);
+                        Console.Write("■");
                     }
-                }
-                isWallGenerated = true;
 
-                Console.WriteLine("fuck you ");
+                    for (int i = 0; i < width; i += 2)
+                    {
+                        Console.SetCursorPosition(i, 0);
+                        Console.Write("■");
+                        Console.SetCursorPosition(i, height - 1);
+                        Console.Write("■");
+                        Console.SetCursorPosition(i, height - 6);
+                        Console.Write("■");
+                    }
+                    /*     Console.SetCursorPosition(0, 0);
+                         for (int i = 0; i < height; i++)
+                         {
+                             Console.WriteLine("■");
+                         }*/
+
+                    Console.SetCursorPosition(enemyY, enemyY);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("◆");
+
+                }
+                generateWallAndEnemy = true;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.SetCursorPosition(x, y);
+                Console.Write("◆");
+                ConsoleKey input = Console.ReadKey(true).Key;
+
+                Console.SetCursorPosition(x, y);
+                Console.Write("  ");
+
+
+                switch (input)
+                {
+                    case ConsoleKey.W:
+                        if (y <= 2)
+                        {
+                            y = 2;
+                            break;
+                        }
+                        if (x != xPosition)
+                        {
+                            y--;
+                        }
+                        else
+                        {
+                            y = Math.Abs(y - enemyY) > 2 ? y - 1 : y;
+                        }
+                        break;
+                    case ConsoleKey.S:
+                        if (y >= 27)
+                        {
+                            y = 27;
+                            break;
+                        }
+                        y++;
+                        break;
+                    case ConsoleKey.A:
+                        if (x <= 2)
+                        {
+                            x = 2;
+                            break;
+                        }
+                        x = x - 2;
+                        break;
+                    case ConsoleKey.D:
+                        if (x >= 46)
+                        {
+                            x = 46;
+                            break;
+                        }
+                        x = x + 2;
+                        break;
+                }
+
 
             }
+
 
             break;
         case 2:
@@ -115,7 +174,45 @@ while (true)
 }
 
 
+/*bool CanWalk(ConsoleKey consoleKey,int positionX,int positionY)
+{
 
+    switch (consoleKey)
+    {
+        case ConsoleKey.W:
+            if (y <= 2)
+            {
+                y = 2;
+                break;
+            }
+            y--;
+            break;
+        case ConsoleKey.S:
+            if (y >= 27)
+            {
+                y = 27;
+                break;
+            }
+            y++;
+            break;
+        case ConsoleKey.A:
+            if (x <= 2)
+            {
+                x = 2;
+                break;
+            }
+            x = x - 2;
+            break;
+        case ConsoleKey.D:
+            if (x >= 46)
+            {
+                x = 46;
+                break;
+            }
+            x = x + 2;
+            break;
+    }
+}*/
 int GetCharCount(string text)
 {
     int count = 0;
