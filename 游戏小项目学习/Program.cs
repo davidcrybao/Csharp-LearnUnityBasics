@@ -108,7 +108,7 @@ while (true)
             #endregion 敌人和围墙的生成
 
             #region Boss属性相关
-            int enemyX = randomPosition.Next(1, 24) * 2;
+            int enemyX = randomPosition.Next(2, 23) * 2;
             int enemyY = randomPosition.Next(1, 14) * 2;
             int enemyHP = 100;
             int enemyAttackMax = 15;
@@ -120,7 +120,7 @@ while (true)
             #region 玩家属性相关
             int playerAttackMin = 8;
             int playerAttackMax = 13;
-            int playerHP = 50;
+            int playerHP = 150;
             int playerX = 2;
             int playerY = 2;
             string playerIcon = "●";
@@ -217,6 +217,15 @@ while (true)
                             {
                                 if (isBossDefeated) break;
                                 isBattling = true;
+                                Console.SetCursorPosition(2, height - 5);
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write("玩家遇到BOSS,准备按J继续");
+                                Console.SetCursorPosition(2, height - 4);
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.Write("Boss的血量是{0}    ", enemyHP);
+                                Console.SetCursorPosition(2, height - 3);
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write("玩家的血量是{0}    ", playerHP);
                             }
 
 
@@ -234,15 +243,7 @@ while (true)
                     int playerAttack = 0;
                     int enemyAttack = 0;
 
-                    Console.SetCursorPosition(2, height - 5);
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("玩家遇到BOSS,准备按J继续");
-                    Console.SetCursorPosition(2, height - 4);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write("Boss的血量是{0}    ", enemyHP);
-                    Console.SetCursorPosition(2, height - 3);
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("玩家的血量是{0}    ", playerHP);
+
 
                     #endregion
 
@@ -259,6 +260,11 @@ while (true)
                         {
                             Console.SetCursorPosition(enemyX, enemyY);
                             Console.WriteLine("   ");
+
+                            Console.SetCursorPosition(20, 20);
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("⊙");
+                            Console.SetCursorPosition(playerX, playerY);
                             isBattling = false;
                         }
                         else //战斗-玩家先出手
@@ -296,9 +302,9 @@ while (true)
                             else  //打败boss 他的HP小于0
                             {
                                 isBossDefeated = true;
-                                isBattling = false;
+
                                 Console.SetCursorPosition(2, height - 5);
-                                Console.Write("恭喜你打败了boss                    ");
+                                Console.Write("恭喜你打败了boss,继续按J寻找公主");
                                 Console.SetCursorPosition(2, height - 4);
                                 Console.Write("                                             ");
                                 Console.SetCursorPosition(2, height - 3);
