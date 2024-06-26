@@ -103,7 +103,7 @@ namespace 数组
             int[] arraylist3 = new int[10];
             Random random = new Random();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < arraylist3.Length; i++)
             {
                 arraylist3[i] = random.Next(0, 101);
                 Console.WriteLine(arraylist3[i]);
@@ -155,6 +155,7 @@ namespace 数组
                 int sum = 0;
                 for (int i = 0; i < arrayList6.Length; i++)
                 {
+                    Console.WriteLine("请输入{0}位同学的成绩", i);
                     arrayList6[i] = int.Parse(Console.ReadLine());
                     sum += arrayList6[i];
                     if (arrayList6[i] > max)
@@ -170,6 +171,7 @@ namespace 数组
 
                 Console.WriteLine("最高和最低分分贝是{0}{1},平均分是{2}", max, min, sum / arrayList6.Length);*/
 
+
             string[] arrayText = new string[25];
             for (int i = 0; i < arrayText.Length; i++)
             {
@@ -181,18 +183,28 @@ namespace 数组
                 {
                     arrayText[i] = "□";
                 }
-
+                //arrayText[i] = i % 2 == 0 ? "■" : "□";
 
             }
-            for (int i = 0; i < arrayText.Length; i++)
+            /*for (int i = 0; i < arrayText.Length; i++)
             {
                 Console.Write(arrayText[i]);
                 if ((i + 1) % 5 == 0 && i > 0)
                 {
                     Console.WriteLine();
                 }
-            }
+            }*/
 
+
+            for (int i = 0; i < arrayText.Length; i++)
+            {
+
+                if ((i) % 5 == 0 && i > 0)
+                {
+                    Console.WriteLine();
+                }
+                Console.Write(arrayText[i]);
+            }
 
             #endregion
         }
