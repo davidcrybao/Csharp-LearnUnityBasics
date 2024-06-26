@@ -70,133 +70,254 @@ while (true)
         case 1:
             Console.Clear();
             Random randomPosition = new Random();
+            bool generateWallAndEnemy = false;
+            bool isBattling = false;
+            bool isBossDefeated = false;
+            #region 敌人和围墙的生成
+
+            if (!generateWallAndEnemy)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                for (int i = 0; i < height; i++)
+                {
+                    Console.SetCursorPosition(0, i);
+                    Console.Write("■");
+                    Console.SetCursorPosition(width - 2, i);
+                    Console.Write("■");
+                }
+
+                for (int i = 0; i < width; i += 2)
+                {
+                    Console.SetCursorPosition(i, 0);
+                    Console.Write("■");
+                    Console.SetCursorPosition(i, height - 1);
+                    Console.Write("■");
+                    Console.SetCursorPosition(i, height - 6);
+                    Console.Write("■");
+                }
+                /*     Console.SetCursorPosition(0, 0);
+                     for (int i = 0; i < height; i++)
+                     {
+                         Console.WriteLine("■");
+                     }*/
+
+                generateWallAndEnemy = true;
+            }
+
+
+            #endregion 敌人和围墙的生成
+
+            #region Boss属性相关
             int enemyX = randomPosition.Next(1, 24) * 2;
             int enemyY = randomPosition.Next(1, 14) * 2;
             int enemyHP = 100;
             int enemyAttackMax = 15;
             int enemyAttackMin = 9;
+            ConsoleColor bossColor = ConsoleColor.Yellow;
+            string bossIcon = "■";
+            #endregion
+
+            #region 玩家属性相关
             int playerAttackMin = 8;
             int playerAttackMax = 13;
-            int playerHP = 150;
-
+            int playerHP = 50;
             int playerX = 2;
             int playerY = 2;
-            bool generateWallAndEnemy = false;
+            string playerIcon = "●";
+
+            #endregion
 
             while (true)
             {
-                #region 敌人和围墙的生成
 
-                if (!generateWallAndEnemy)
+                #region Boss属性相关及绘制
+
+                if (enemyHP > 0)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    for (int i = 0; i < height; i++)
-                    {
-                        Console.SetCursorPosition(0, i);
-                        Console.Write("■");
-                        Console.SetCursorPosition(width - 2, i);
-                        Console.Write("■");
-                    }
-
-                    for (int i = 0; i < width; i += 2)
-                    {
-                        Console.SetCursorPosition(i, 0);
-                        Console.Write("■");
-                        Console.SetCursorPosition(i, height - 1);
-                        Console.Write("■");
-                        Console.SetCursorPosition(i, height - 6);
-                        Console.Write("■");
-                    }
-                    /*     Console.SetCursorPosition(0, 0);
-                         for (int i = 0; i < height; i++)
-                         {
-                             Console.WriteLine("■");
-                         }*/
-
                     Console.SetCursorPosition(enemyX, enemyY);
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("◆");
+                    Console.ForegroundColor = bossColor;
+                    Console.WriteLine(bossIcon);
                 }
-                generateWallAndEnemy = true;
 
-                #endregion 敌人和围墙的生成
+                #endregion
+
+                #region  玩家移动相关
+
+
+                #endregion
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.SetCursorPosition(playerX, playerY);
-                Console.Write("◆");
+                Console.Write(playerIcon);
+                //玩家输入
                 ConsoleKey input = Console.ReadKey(true).Key;
 
-                Console.SetCursorPosition(playerX, playerY);
-                Console.Write("  ");
 
-                #region 玩家移动代码 检测敌人
-                switch (input)
+
+                if (!isBattling)
                 {
-                    case ConsoleKey.W:
-                        playerY--;
-                        if (playerY < 1)
-                        {
-                            playerY = 1;
-                        }
-                        else if (playerX == enemyX && playerY == enemyY)
-                        {
-                            playerY++;
-                        }
+                    #region 玩家移动代码 检测敌人
+                    Console.SetCursorPosition(playerX, playerY);
+                    Console.Write("  ");
 
-                        break;
-
-                    case ConsoleKey.S:
-                        playerY++;
-                        if (playerY > 28)
-                        {
-                            playerY = 28;
-                        }
-                        else if (playerX == enemyX && playerY == enemyY)
-                        {
+                    switch (input)
+                    {
+                        case ConsoleKey.W:
                             playerY--;
-                        }
+                            if (playerY < 1)
+                            {
+                                playerY = 1;
+                            }
+                            else if (playerX == enemyX && playerY == enemyY)
+                            {
+                                playerY++;
+                            }
 
-                        break;
+                            break;
 
-                    case ConsoleKey.A:
-                        playerX -= 2;
-                        if (playerX < 2)
-                        {
-                            playerX = 2;
-                        }
-                        else if (playerX == enemyX && playerY == enemyY)
-                        {
-                            playerX += 2;
-                        }
-                        break;
+                        case ConsoleKey.S:
+                            playerY++;
+                            if (playerY > 28)
+                            {
+                                playerY = 28;
+                            }
+                            else if (playerX == enemyX && playerY == enemyY)
+                            {
+                                playerY--;
+                            }
 
-                    case ConsoleKey.D:
-                        playerX += 2;
-                        if (playerX >= 46)
-                        {
-                            playerX = 46;
-                        }
-                        else if (playerX == enemyX && playerY == enemyY)
-                        {
+                            break;
+
+                        case ConsoleKey.A:
                             playerX -= 2;
-                        }
-                        break;
-                    case ConsoleKey.Q:
-                        if ((playerX == enemyX && MathF.Abs(playerY - enemyY) == 1) ||
-     (playerY == enemyY && MathF.Abs(playerX - enemyX) == 2))
-                        {
-                            Console.WriteLine("开始战斗");
-                        }
+                            if (playerX < 2)
+                            {
+                                playerX = 2;
+                            }
+                            else if (playerX == enemyX && playerY == enemyY)
+                            {
+                                playerX += 2;
+                            }
+                            break;
+
+                        case ConsoleKey.D:
+                            playerX += 2;
+                            if (playerX >= 46)
+                            {
+                                playerX = 46;
+                            }
+                            else if (playerX == enemyX && playerY == enemyY)
+                            {
+                                playerX -= 2;
+                            }
+                            break;
+                        case ConsoleKey.Q:
+                            if ((playerX == enemyX && MathF.Abs(playerY - enemyY) == 1) ||
+         (playerY == enemyY && MathF.Abs(playerX - enemyX) == 2))
+                            {
+                                if (isBossDefeated) break;
+                                isBattling = true;
+                            }
 
 
-                        break;
+                            break;
+                    }
+
+                    #endregion
                 }
-                #endregion
+                //战斗逻辑
+                else
+                {
+                    #region 攻击初始化 以及文本显示
+
+                    Random random = new Random();
+                    int playerAttack = 0;
+                    int enemyAttack = 0;
+
+                    Console.SetCursorPosition(2, height - 5);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("玩家遇到BOSS,准备按J继续");
+                    Console.SetCursorPosition(2, height - 4);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("Boss的血量是{0}    ", enemyHP);
+                    Console.SetCursorPosition(2, height - 3);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("玩家的血量是{0}    ", playerHP);
+
+                    #endregion
+
+
+                    if (input == ConsoleKey.J)
+                    {
+                        //先判断玩家是否活着
+                        if (playerHP < 0)
+                        {
+                            currentSceneID = 2;
+                            break;
+                        }//Boss是否被打败
+                        else if (enemyHP <= 0)
+                        {
+                            Console.SetCursorPosition(enemyX, enemyY);
+                            Console.WriteLine("   ");
+                            isBattling = false;
+                        }
+                        else //战斗-玩家先出手
+                        {
+                            playerAttack = random.Next(playerAttackMin, playerAttackMax);
+                            enemyAttack = random.Next(enemyAttackMin, enemyAttackMax);
+                            enemyHP -= playerAttack;
+
+                            Console.SetCursorPosition(2, height - 5);
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("玩家正在与Boss进行战斗,按J继续");
+                            Console.SetCursorPosition(2, height - 4);
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("玩家对boss造成了{0}伤害,Boss的血量是{1}    ", playerAttack, enemyHP);
+
+
+                            //怪兽打玩家
+                            if (enemyHP > 0)
+                            {
+                                Console.SetCursorPosition(2, height - 3);
+                                Console.ForegroundColor = ConsoleColor.White;
+                                playerHP -= enemyAttack;
+
+
+                                //Boss打败了玩家
+                                if (playerHP <= 0)
+                                {
+                                    Console.Write("很遗憾,你未能通过Boss失联,失败了           ");
+                                }
+                                else
+                                {
+                                    Console.Write("boss造成了{0}伤害,当前玩家的血量是{1}    ", enemyAttack, playerHP);
+                                }
+                            }
+                            else  //打败boss 他的HP小于0
+                            {
+                                isBossDefeated = true;
+                                isBattling = false;
+                                Console.SetCursorPosition(2, height - 5);
+                                Console.Write("恭喜你打败了boss                    ");
+                                Console.SetCursorPosition(2, height - 4);
+                                Console.Write("                                             ");
+                                Console.SetCursorPosition(2, height - 3);
+                                Console.Write("                                             ");
+                            }
+
+                        }
+
+                    }
+                }
+
             }
 
             break;
 
         case 2:
+            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine("游戏结束");
             break;
     }
 }
