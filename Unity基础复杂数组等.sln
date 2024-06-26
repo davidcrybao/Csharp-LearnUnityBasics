@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity基础复杂数组等", "Unity基础复杂数组等\Unity基础复杂数组等.csproj", "{3A9DCE23-87AA-49E4-8B65-21B1A9629845}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enum2", "Enum\Enum2.csproj", "{372EC927-53B3-4152-9CE3-1FCFE5D78E4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "数组", "数组\数组.csproj", "{8F1379F9-CDE4-48D6-BC56-AE7255793335}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3A9DCE23-87AA-49E4-8B65-21B1A9629845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A9DCE23-87AA-49E4-8B65-21B1A9629845}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A9DCE23-87AA-49E4-8B65-21B1A9629845}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A9DCE23-87AA-49E4-8B65-21B1A9629845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{372EC927-53B3-4152-9CE3-1FCFE5D78E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{372EC927-53B3-4152-9CE3-1FCFE5D78E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{372EC927-53B3-4152-9CE3-1FCFE5D78E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{372EC927-53B3-4152-9CE3-1FCFE5D78E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F1379F9-CDE4-48D6-BC56-AE7255793335}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F1379F9-CDE4-48D6-BC56-AE7255793335}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F1379F9-CDE4-48D6-BC56-AE7255793335}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F1379F9-CDE4-48D6-BC56-AE7255793335}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
