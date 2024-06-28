@@ -17,6 +17,12 @@
         }
         static void Test(params int[] ints)
         {
+            if (ints.Length == 0)
+            {
+                Console.Write("没有参数");
+                return;
+            }
+
             int sum = 0;
             for (int i = 0; i < ints.Length; i++)
             {
@@ -29,6 +35,11 @@
 
         static void GetEvenOrOdd(params int[] ints)
         {
+            if (ints.Length == 0)
+            {
+                Console.Write("没有参数");
+                return;
+            }
             int sumEven = 0;
             int sumOdd = 0;
             for (int i = 0; i < ints.Length; i++)
