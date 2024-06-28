@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Enum2", "Enum\Enum2.csproj"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "数组", "数组\数组.csproj", "{8F1379F9-CDE4-48D6-BC56-AE7255793335}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "二维数组", "二维数组\二维数组.csproj", "{3E0FA594-EE12-4A2C-9A48-22CD98E0EE65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "二维数组", "二维数组\二维数组.csproj", "{3E0FA594-EE12-4A2C-9A48-22CD98E0EE65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "string", "string\string.csproj", "{7E20B77F-96DA-43BB-8293-1D123EBAF48B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ref&out", "ref&out\ref&out.csproj", "{7EB0D621-BAB8-40A3-B24C-FFD8C3DAEAD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{3E0FA594-EE12-4A2C-9A48-22CD98E0EE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E0FA594-EE12-4A2C-9A48-22CD98E0EE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E0FA594-EE12-4A2C-9A48-22CD98E0EE65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E20B77F-96DA-43BB-8293-1D123EBAF48B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E20B77F-96DA-43BB-8293-1D123EBAF48B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E20B77F-96DA-43BB-8293-1D123EBAF48B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E20B77F-96DA-43BB-8293-1D123EBAF48B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EB0D621-BAB8-40A3-B24C-FFD8C3DAEAD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EB0D621-BAB8-40A3-B24C-FFD8C3DAEAD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EB0D621-BAB8-40A3-B24C-FFD8C3DAEAD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EB0D621-BAB8-40A3-B24C-FFD8C3DAEAD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
