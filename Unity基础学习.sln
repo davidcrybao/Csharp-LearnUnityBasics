@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "string", "string\string.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ref&out", "ref&out\ref&out.csproj", "{7EB0D621-BAB8-40A3-B24C-FFD8C3DAEAD0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "变长参数,参数默认值", "变长参数\变长参数,参数默认值.csproj", "{273DA317-AFD4-45DF-82BF-49902EEB9455}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7EB0D621-BAB8-40A3-B24C-FFD8C3DAEAD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EB0D621-BAB8-40A3-B24C-FFD8C3DAEAD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EB0D621-BAB8-40A3-B24C-FFD8C3DAEAD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{273DA317-AFD4-45DF-82BF-49902EEB9455}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{273DA317-AFD4-45DF-82BF-49902EEB9455}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{273DA317-AFD4-45DF-82BF-49902EEB9455}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{273DA317-AFD4-45DF-82BF-49902EEB9455}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

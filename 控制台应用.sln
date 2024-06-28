@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "随机数", "随机数\随�
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "游戏小项目学习", "游戏小项目学习\游戏小项目学习.csproj", "{CA659B71-D112-41C5-80E9-8CFD9293642A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test1", "test1\test1.csproj", "{0CDA35C9-9EAD-42BD-B143-D7FFF5BC85AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test1", "test1\test1.csproj", "{0CDA35C9-9EAD-42BD-B143-D7FFF5BC85AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C#基础", "C#基础", "{856750C9-AD7D-4076-BCD3-DBCD21E8E944}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
