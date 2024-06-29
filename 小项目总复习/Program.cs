@@ -23,7 +23,7 @@
             Console.SetBufferSize(width, height);
             int currentWindowIndex = 1;
             int choice = 0;
-
+            bool hasGenerate = false;
 
             while (true)
             {
@@ -73,6 +73,7 @@
                         Vector2 startPosition = new Vector2(0, 0);
                         int endXPosition = 0;
                         int endYPosition = 0;
+
                         while (true)
                         {
 
@@ -102,29 +103,63 @@
                             //我们是在最上面的生成地图的 所以坐标(2,1)开始 到坐标(46,28) 复杂的逻辑 生成其他的时候记录count+二元数组坐标(或者xy两个数组);
                             //(2,29-46.34) 是我们说明的文档生成 最简单的一部分
                             //(2.35-46.38)是我们按键互动之后生成,这里面的逻辑比较复杂
-                            startPosition.x = r.Next(2, 15);
+                            startPosition.x = r.Next(3, 15); //从3开始是因为2的时候我们要在前面画一个起点,这会画到围墙里面
                             startPosition.y = r.Next(2, 5);
                             endXPosition = r.Next(2, 46);
                             endYPosition = r.Next(25, 28);
                             Console.ForegroundColor = ConsoleColor.White;
+                            Console.SetCursorPosition(startPosition.x - 2, startPosition.y);
+                            Console.Write("□");
                             Console.SetCursorPosition(startPosition.x, startPosition.y);
-                            for (int i = 0; i < 12; i++)
+                            int number = r.Next(0, 12) * 2;
+                            for (int i = 0; i < 16; i++)
                             {
-
-                                for (int j = 0; j < 24; j += 2)
+                                bool hasExecuted = false;
+                                //最后一行我们倒序生成 
+                                if (i == 14)
                                 {
-                                    if (i % 2 == 0)
-                                    {
-                                        Console.SetCursorPosition(startPosition.x + j, startPosition.y + i);
-                                        Console.Write("□");
-                                    }
-                                    else if (j == 22)
-                                    {
-                                        Console.SetCursorPosition(startPosition.x + j, startPosition.y + i);
-                                        Console.Write("□");
-                                    }
 
+                                    for (int j = r.Next(0, 12) * 2; j > 0; j -= 2)
+                                    {
+
+                                        if (i % 2 == 0)
+                                        {
+                                            Console.SetCursorPosition(startPosition.x + 24 - j, startPosition.y + i);
+                                            Console.Write("□");
+                                        }
+
+                                    }
+                                }//不是最后一行,我们先判断是不是偶数行,偶数行生成一组□,不是的话生成头尾方块
+                                else
+                                {
+                                    for (int j = 0; j < 24; j += 2)
+                                    {
+
+                                        if (i % 2 == 0)
+                                        {
+                                            Console.SetCursorPosition(startPosition.x + j, startPosition.y + i);
+                                            Console.Write("□");
+                                        }
+                                        else if (j == 22 && !hasGenerate && !hasExecuted && i != 15)
+                                        {
+                                            Console.SetCursorPosition(startPosition.x + j, startPosition.y + i);
+                                            Console.Write("□");
+                                            hasGenerate = true;
+                                            hasExecuted = true;
+                                        }
+                                        else if (j == 0 && hasGenerate && !hasExecuted && i != 15)
+                                        {
+                                            Console.SetCursorPosition(startPosition.x + j, startPosition.y + i);
+                                            Console.Write("■");
+                                            hasGenerate = false;
+                                            hasExecuted = true;
+                                        }
+
+                                    }
                                 }
+
+
+
 
 
 
