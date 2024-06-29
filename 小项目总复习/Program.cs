@@ -4,6 +4,7 @@
     {
         static void Main(string[] args)
         {
+            Random r = new Random();
             int width = 50;
             int height = 40;
             int cursorX = 0, cursorY = 0;
@@ -59,10 +60,15 @@
                     case 1:
                         Console.Clear();
 
+                        int startXPosition = 0;
+                        int startYPosition = 0;
+                        int endXPosition = 0;
+                        int endYPosition = 0;
                         while (true)
                         {
 
                             #region 2围墙生成
+                            Console.ForegroundColor = ConsoleColor.Red;
                             for (int i = 0; i < width; i += 2)
                             {
                                 Console.SetCursorPosition(i, 0);
@@ -83,6 +89,17 @@
                                 Console.Write("■");
                             }
                             #endregion
+                            #region 地图的逻辑生成
+                            //我们是在最上面的生成地图的 所以坐标(2,1)开始 到坐标(46,28) 复杂的逻辑 生成其他的时候记录count+二元数组坐标(或者xy两个数组);
+                            //(2,29-46.34) 是我们说明的文档生成 最简单的一部分
+                            //(2.35-46.38)是我们按键互动之后生成,这里面的逻辑比较复杂
+                            startXPosition = r.Next(2, 46);
+                            startYPosition = r.Next(2, 5);
+                            endXPosition = r.Next(2, 46);
+                            endYPosition = r.Next(25, 28);
+
+                            #endregion
+
 
                             ConsoleKey input = Console.ReadKey().Key;
                             switch (input)
