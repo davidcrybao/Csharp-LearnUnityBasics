@@ -77,7 +77,7 @@
                         Vector2 playerStartPosition = new Vector2(0, 0);
                         Vector2[] funcVector = new Vector2[20];
                         int playerPosition = 0;
-
+                        int backwardSteps = 10;
                         string block = "□"; //跟障碍物进行交换,或者写个结构体?
 
                         #region 2围墙生成
@@ -109,8 +109,7 @@
                         //(2.35-46.38)是我们按键互动之后生成,这里面的逻辑比较复杂
                         drawStartPosition.x = r.Next(4, 18); //从3开始是因为2的时候我们要在前面画一个起点,这会画到围墙里面
                         drawStartPosition.y = r.Next(2, 5);
-                        /*int number = r.Next(2, 15);*/
-                        int number = 6;
+                        int number = r.Next(2, 15);
                         Vector2[] totalPosition = new Vector2[117 + number];  //总数其实是固定的,9行 每列12+
                         int count = 0; //count是为了给funcVector用
 
@@ -227,10 +226,11 @@
                         #endregion
 
                         #region 障碍物的生成
-                        bool[] isPositionUsed = new bool[117];
+                        bool[] isPositionUsed = new bool[117 + number];
                         Vector2[] boomPosition = new Vector2[5];
                         Vector2[] stopPosition = new Vector2[5];
-                        Vector2[] ranPosition = new Vector2[5];
+                        int playerInteract = 0;
+                        Vector2[] randomInteractPosition = new Vector2[5];
                         Console.ForegroundColor = ConsoleColor.Blue;
                         for (int i = 0; i < 5; i++)
                         {
@@ -262,8 +262,8 @@
 
                             Console.SetCursorPosition(totalPosition[randomPosition].x, totalPosition[randomPosition].y);
                             Console.Write("▲");
-                            ranPosition[i].x = totalPosition[randomPosition].x;
-                            ranPosition[i].y = totalPosition[randomPosition].y;
+                            randomInteractPosition[i].x = totalPosition[randomPosition].x;
+                            randomInteractPosition[i].y = totalPosition[randomPosition].y;
                         }
 
 
@@ -288,27 +288,108 @@
 
                         #endregion
 
+                        #region 提示信息生成
+                        Console.SetCursorPosition(2, 30);
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("□:普通格子");
+                        Console.SetCursorPosition(2, 32);
+                        Console.Write("▲:时空隧道,随机倒退,暂停,换位置");
+                        Console.SetCursorPosition(2, 33);
+                        Console.Write("★:玩家   ");
+
+
+                        Console.SetCursorPosition(2, 31);
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.Write("￠:暂停,一回合不动     ");
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.Write("●:炸弹,倒退10格 ");
+                        #endregion
+
                         while (true)
                         {
 
 
 
                             #region 投掷筛子逻辑
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.SetCursorPosition(playerStartPosition.x, playerStartPosition.y);
-                            Console.Write("★");
+
                             int diceNumber = r.Next(0, 7);
+
                             ConsoleKey input = Console.ReadKey().Key;
                             switch (input)
                             {
                                 case ConsoleKey.E:
+                                    if (playerInteract == 1)
+                                    {
+                                        playerInteract = 0;
+                                        break;
+                                    }
+                                    else if (playerInteract != 0)
+                                    {
+                                        playerInteract = 0;
+                                    }
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    Console.SetCursorPosition(totalPosition[playerPosition].x, totalPosition[playerPosition].y);
+                                    Console.Write("□");
                                     playerPosition += diceNumber;
+
+                                    //到达终点
                                     if (playerPosition >= totalPosition.Length)
                                     {
                                         playerPosition = totalPosition.Length - 1;
                                     }
+                                    Console.ForegroundColor = ConsoleColor.Cyan;
                                     Console.SetCursorPosition(totalPosition[playerPosition].x, totalPosition[playerPosition].y);
                                     Console.Write("★");
+                                    if (isPositionUsed[playerPosition])
+                                    {
+
+                                        for (int i = 0; i < stopPosition.Length; i++)
+                                        {
+                                            if (totalPosition[playerPosition].x == stopPosition[i].x && totalPosition[playerPosition].y == stopPosition[i].y)
+                                            {
+                                                playerInteract = 1;
+                                            }
+                                            //炸弹的逻辑
+                                            if (totalPosition[playerPosition].x == boomPosition[i].x && totalPosition[playerPosition].y == boomPosition[i].y)
+                                            {
+                                                //遇到一次之后删除
+                                                boomPosition[i].x = 0;
+                                                boomPosition[i].y = 0;
+                                                playerInteract = 2;
+                                                backwardSteps = 10;
+                                                playerPosition = Boom(totalPosition, playerPosition, drawStartPosition, backwardSteps);
+
+                                            }
+
+                                            if (totalPosition[playerPosition].x == randomInteractPosition[i].x && totalPosition[playerPosition].y == randomInteractPosition[i].y)
+                                            {
+                                                randomInteractPosition[i].x = 0;
+                                                randomInteractPosition[i].y = 0;
+                                                int randomFunction = r.Next(0, 3);
+
+
+                                                switch (randomFunction)
+                                                {
+                                                    case 0:
+
+                                                        playerInteract = 2;
+                                                        backwardSteps = r.Next(5, 15); ;
+                                                        playerPosition = Boom(totalPosition, playerPosition, drawStartPosition, backwardSteps);
+
+                                                        break;
+                                                    case 1:
+                                                        playerInteract = 1;
+                                                        break;
+                                                    case 2:
+                                                        playerInteract = 3;
+                                                        break;
+                                                }
+
+                                            }
+
+                                        }
+                                    }
+                                    PlayerInteractTextGenerate(diceNumber, playerInteract);
                                     break;
 
                             }
@@ -336,6 +417,64 @@
 
         }
 
+        static void PlayerInteractTextGenerate(int diceNumber, int playerInterctOption = 0, int backwardSteps = 10)
+        {
+            Console.SetCursorPosition(2, 35);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("玩家扔出的点数为{0}", diceNumber);
+
+
+            switch (playerInterctOption)
+            {
+                case 1:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(2, 36);
+                    Console.Write("你被禁止移动一个回合       ");
+                    break;
+                case 2:
+                    Console.SetCursorPosition(2, 36);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("你遇到了炸弹,倒退{0}格     ", backwardSteps);
+                    break;
+                case 3:
+                    Console.SetCursorPosition(2, 36);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("准备与电脑交换位置     ", backwardSteps);
+                    break;
+                default:
+                    Console.SetCursorPosition(2, 36);
+                    Console.Write("你到达了一个安全的位置");
+                    break;
+
+            }
+
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(2, 37);
+            Console.Write("请按E键继续投掷色子");
+            Console.SetCursorPosition(2, 38);
+        }
+
+        static int Boom(Vector2[] totalPosition, int playerPosition, Vector2 drawStartPosition, int backwardSteps = 10)
+        {
+            Console.SetCursorPosition(totalPosition[playerPosition].x, totalPosition[playerPosition].y);
+            Console.Write("□");
+            //这里好像逻辑有问题
+
+            if (totalPosition[playerPosition].y - drawStartPosition.y > 1)
+            {
+                playerPosition = playerPosition - backwardSteps;
+            }
+            else
+            {
+                playerPosition = playerPosition - backwardSteps > drawStartPosition.x - 2 ? playerPosition - backwardSteps : drawStartPosition.x - 2;
+            }
+
+            Console.SetCursorPosition(totalPosition[playerPosition].x, totalPosition[playerPosition].y);
+            Console.Write("★");
+            return playerPosition;
+
+        }
         static string ChangeBlock()
         {
             return "x";
