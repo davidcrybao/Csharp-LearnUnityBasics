@@ -21,9 +21,11 @@
             int cursorX = 0, cursorY = 0;
             Console.SetWindowSize(width, height);
             Console.SetBufferSize(width, height);
+
             int currentWindowIndex = 1;
             int choice = 0;
             bool hasGenerate = false;
+
 
             while (true)
             {
@@ -70,13 +72,15 @@
 
                     case 1:
                         Console.Clear();
-                        Vector2 startPosition = new Vector2(0, 0);
-                        int endXPosition = 0;
-                        int endYPosition = 0;
+                        Vector2 drawStartPosition = new Vector2(0, 0);
+                        Vector2 playerStartPosition = new Vector2(0, 0);
 
+                        Vector2[] funcVector = new Vector2[20];
+
+                        string block = "□"; //跟障碍物进行交换,或者写个结构体?
                         while (true)
                         {
-
+                            Console.Clear();
                             #region 2围墙生成
                             Console.ForegroundColor = ConsoleColor.Red;
                             for (int i = 0; i < width; i += 2)
@@ -99,24 +103,29 @@
                                 Console.Write("■");
                             }
                             #endregion
+
                             #region 地图的逻辑生成
                             //我们是在最上面的生成地图的 所以坐标(2,1)开始 到坐标(46,28) 复杂的逻辑 生成其他的时候记录count+二元数组坐标(或者xy两个数组);
                             //(2,29-46.34) 是我们说明的文档生成 最简单的一部分
                             //(2.35-46.38)是我们按键互动之后生成,这里面的逻辑比较复杂
-                            startPosition.x = r.Next(3, 15); //从3开始是因为2的时候我们要在前面画一个起点,这会画到围墙里面
-                            startPosition.y = r.Next(2, 5);
-                            endXPosition = r.Next(2, 46);
-                            endYPosition = r.Next(25, 28);
+                            drawStartPosition.x = r.Next(4, 18); //从3开始是因为2的时候我们要在前面画一个起点,这会画到围墙里面
+                            drawStartPosition.y = r.Next(2, 5);
+                            Vector2[] totalPosition = new Vector2[117];  //总数其实是固定的,9行 每列12+
+                            int count = 0; //count是为了给funcVector用
+
                             Console.ForegroundColor = ConsoleColor.White;
-                            Console.SetCursorPosition(startPosition.x - 2, startPosition.y);
+                            Console.SetCursorPosition(drawStartPosition.x - 2, drawStartPosition.y);
+                            playerStartPosition.x = drawStartPosition.x - 2;
+                            playerStartPosition.y = drawStartPosition.y;
                             Console.Write("□");
-                            Console.SetCursorPosition(startPosition.x, startPosition.y);
+                            Console.SetCursorPosition(drawStartPosition.x, drawStartPosition.y);
                             int number = r.Next(0, 12) * 2;
-                            for (int i = 0; i < 16; i++)
+                            bool generateFunc = r.Next(0, 24) > 18;
+                            for (int i = 0; i < 20; i++)
                             {
                                 bool hasExecuted = false;
                                 //最后一行我们倒序生成 
-                                if (i == 14)
+                                if (i == 18)
                                 {
 
                                     for (int j = r.Next(0, 12) * 2; j > 0; j -= 2)
@@ -124,7 +133,7 @@
 
                                         if (i % 2 == 0)
                                         {
-                                            Console.SetCursorPosition(startPosition.x + 24 - j, startPosition.y + i);
+                                            Console.SetCursorPosition(drawStartPosition.x + 24 - j, drawStartPosition.y + i);
                                             Console.Write("□");
                                         }
 
@@ -137,36 +146,105 @@
 
                                         if (i % 2 == 0)
                                         {
-                                            Console.SetCursorPosition(startPosition.x + j, startPosition.y + i);
+                                            Console.SetCursorPosition(drawStartPosition.x + j, drawStartPosition.y + i);
                                             Console.Write("□");
+                                            totalPosition[count].x = drawStartPosition.x + j;
+                                            totalPosition[count].y = drawStartPosition.y + i;
+                                            count++;
                                         }
-                                        else if (j == 22 && !hasGenerate && !hasExecuted && i != 15)
+                                        else if (j == 22 && !hasGenerate && !hasExecuted && i != 19)
                                         {
-                                            Console.SetCursorPosition(startPosition.x + j, startPosition.y + i);
+                                            Console.SetCursorPosition(drawStartPosition.x + j, drawStartPosition.y + i);
                                             Console.Write("□");
+                                            totalPosition[count].x = drawStartPosition.x + j;
+                                            totalPosition[count].y = drawStartPosition.y + i;
+                                            count++;
                                             hasGenerate = true;
                                             hasExecuted = true;
                                         }
-                                        else if (j == 0 && hasGenerate && !hasExecuted && i != 15)
+                                        else if (j == 0 && hasGenerate && !hasExecuted && i != 19)
                                         {
-                                            Console.SetCursorPosition(startPosition.x + j, startPosition.y + i);
-                                            Console.Write("■");
+                                            Console.SetCursorPosition(drawStartPosition.x + j, drawStartPosition.y + i);
+                                            Console.Write("□");
+                                            totalPosition[count].x = drawStartPosition.x + j;
+                                            totalPosition[count].y = drawStartPosition.y + i;
+                                            count++;
                                             hasGenerate = false;
                                             hasExecuted = true;
                                         }
 
                                     }
                                 }
-
-
-
-
-
-
                             }
                             #endregion
 
+                            #region 障碍物的生成
+                            bool[] isPositionUsed = new bool[117];
+                            Vector2[] boomPosition = new Vector2[5];
+                            Vector2[] stopPosition = new Vector2[5];
+                            Vector2[] ranPosition = new Vector2[5];
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            for (int i = 0; i < 5; i++)
+                            {
 
+                                int randomPosition;
+                                do
+                                {
+                                    randomPosition = r.Next(0, 117);
+                                } while (isPositionUsed[randomPosition]);
+
+                                isPositionUsed[randomPosition] = true;
+
+                                Console.SetCursorPosition(totalPosition[randomPosition].x, totalPosition[randomPosition].y);
+                                Console.Write("￠");
+                                stopPosition[i].x = totalPosition[randomPosition].x;
+                                stopPosition[i].y = totalPosition[randomPosition].y;
+                            }
+
+                            Console.ForegroundColor = ConsoleColor.White;
+                            for (int i = 0; i < 5; i++)
+                            {
+                                int randomPosition;
+                                do
+                                {
+                                    randomPosition = r.Next(0, 117);
+                                } while (isPositionUsed[randomPosition]);
+
+                                isPositionUsed[randomPosition] = true;
+
+                                Console.SetCursorPosition(totalPosition[randomPosition].x, totalPosition[randomPosition].y);
+                                Console.Write("▲");
+                                ranPosition[i].x = totalPosition[randomPosition].x;
+                                ranPosition[i].y = totalPosition[randomPosition].y;
+                            }
+
+
+
+
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            for (int i = 0; i < 5; i++)
+                            {
+                                int randomPosition;
+                                do
+                                {
+                                    randomPosition = r.Next(0, 117);
+                                } while (isPositionUsed[randomPosition]);
+
+                                isPositionUsed[randomPosition] = true;
+
+                                Console.SetCursorPosition(totalPosition[randomPosition].x, totalPosition[randomPosition].y);
+                                Console.Write("●");
+                                boomPosition[i].x = totalPosition[randomPosition].x;
+                                boomPosition[i].y = totalPosition[randomPosition].y;
+                            }
+
+                            #endregion
+
+
+                            #region 投掷筛子逻辑
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.SetCursorPosition(playerStartPosition.x, playerStartPosition.y);
+                            Console.Write("★");
                             ConsoleKey input = Console.ReadKey().Key;
                             switch (input)
                             {
@@ -189,6 +267,9 @@
                                     break;
 
                             }
+
+
+                            #endregion
                         }
 
                         break;
@@ -208,6 +289,11 @@
             Console.SetCursorPosition(width / 2 - length, position);
             Console.Write(text);
 
+        }
+
+        static string ChangeBlock()
+        {
+            return "x";
         }
     }
 }
