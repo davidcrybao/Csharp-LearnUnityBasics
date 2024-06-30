@@ -390,6 +390,23 @@
 
                                                     case 2:
                                                         playerInteract = 3;
+
+                                                        Console.ForegroundColor = ConsoleColor.White;
+                                                        Console.SetCursorPosition(totalPosition[computerPosition].x, totalPosition[computerPosition].y);
+                                                        Console.Write("□");
+                                                        Console.SetCursorPosition(totalPosition[playerPosition].x, totalPosition[playerPosition].y);
+                                                        Console.Write("□");
+
+                                                        int temp = playerPosition;
+                                                        playerPosition = computerPosition;
+                                                        computerPosition = playerPosition;
+
+                                                        Console.ForegroundColor = ConsoleColor.Magenta;
+                                                        Console.SetCursorPosition(totalPosition[computerPosition].x, totalPosition[computerPosition].y);
+                                                        Console.Write("◆");
+                                                        Console.ForegroundColor = ConsoleColor.Cyan;
+                                                        Console.SetCursorPosition(totalPosition[playerPosition].x, totalPosition[playerPosition].y);
+                                                        Console.Write("★");
                                                         break;
                                                 }
                                             }
@@ -425,7 +442,7 @@
                                             isGameover = true;
                                             computerPosition = totalPosition.Length - 1;
                                         }
-                                        Console.ForegroundColor = ConsoleColor.Cyan;
+                                        Console.ForegroundColor = ConsoleColor.Magenta;
                                         Console.SetCursorPosition(totalPosition[computerPosition].x, totalPosition[computerPosition].y);
                                         Console.Write("◆");
                                         //重合的情况
@@ -476,6 +493,22 @@
 
                                                         case 2:
                                                             computerInteract = 3;
+
+                                                            Console.ForegroundColor = ConsoleColor.White;
+                                                            Console.SetCursorPosition(totalPosition[computerPosition].x, totalPosition[computerPosition].y);
+                                                            Console.Write("□");
+                                                            Console.SetCursorPosition(totalPosition[playerPosition].x, totalPosition[playerPosition].y);
+                                                            Console.Write("□");
+
+                                                            int temp = computerPosition;
+                                                            computerPosition = playerPosition;
+                                                            playerPosition = temp;
+                                                            Console.ForegroundColor = ConsoleColor.Cyan;
+                                                            Console.SetCursorPosition(totalPosition[playerPosition].x, totalPosition[playerPosition].y);
+                                                            Console.Write("★");
+                                                            Console.ForegroundColor = ConsoleColor.Magenta;
+                                                            Console.SetCursorPosition(totalPosition[computerPosition].x, totalPosition[computerPosition].y);
+                                                            Console.Write("◆");
                                                             break;
                                                     }
                                                 }
@@ -492,11 +525,12 @@
                             {
                                 break;
                             }
-                            #endregion 投掷筛子逻辑
+                            #endregion 玩家电脑投掷筛子逻辑
                         }
                         break;
 
                     case 2:
+                        #region 游戏结束场景
                         Console.Clear();
                         while (true)
                         {
@@ -535,6 +569,8 @@
                                 break;
                             }
                         }
+
+                        #endregion
                         break;
                 }
             }
@@ -575,7 +611,7 @@
 
                 default:
                     Console.SetCursorPosition(2, 36);
-                    Console.Write("你到达了一个安全的位置");
+                    Console.Write("你到达了一个安全的位置       ");
                     break;
             }
 
@@ -608,12 +644,12 @@
                 case 3:
                     Console.SetCursorPosition(2, 36);
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write("准备与玩家交换位置     ", backwardSteps);
+                    Console.Write("准备与玩家交换位置              ", backwardSteps);
                     break;
 
                 default:
                     Console.SetCursorPosition(2, 36);
-                    Console.Write("电脑到达了一个安全的位置");
+                    Console.Write("电脑到达了一个安全的位置    ");
                     break;
             }
 
