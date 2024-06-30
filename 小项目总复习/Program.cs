@@ -25,6 +25,7 @@
             int currentWindowIndex = 1;
             int choice = 0;
             bool hasGenerate = false;
+            bool isReversedOrder = false;
 
 
             while (true)
@@ -108,7 +109,9 @@
                         //(2.35-46.38)是我们按键互动之后生成,这里面的逻辑比较复杂
                         drawStartPosition.x = r.Next(4, 18); //从3开始是因为2的时候我们要在前面画一个起点,这会画到围墙里面
                         drawStartPosition.y = r.Next(2, 5);
-                        Vector2[] totalPosition = new Vector2[117];  //总数其实是固定的,9行 每列12+
+                        /*int number = r.Next(2, 15);*/
+                        int number = 6;
+                        Vector2[] totalPosition = new Vector2[117 + number];  //总数其实是固定的,9行 每列12+
                         int count = 0; //count是为了给funcVector用
 
                         Console.ForegroundColor = ConsoleColor.White;
@@ -117,7 +120,7 @@
                         playerStartPosition.y = drawStartPosition.y;
                         Console.Write("□");
                         Console.SetCursorPosition(drawStartPosition.x, drawStartPosition.y);
-                        int number = r.Next(0, 12) * 2;
+
                         bool generateFunc = r.Next(0, 24) > 18;
                         for (int i = 0; i < 20; i++)
                         {
@@ -126,52 +129,99 @@
                             if (i == 18)
                             {
 
-                                for (int j = r.Next(0, 12) * 2; j > 0; j -= 2)
+
+                                for (int j = -2; j >= -number * 2; j -= 2)
                                 {
 
                                     if (i % 2 == 0)
                                     {
-                                        Console.SetCursorPosition(drawStartPosition.x + 24 - j, drawStartPosition.y + i);
-                                        Console.Write("□");
+                                        Console.SetCursorPosition(drawStartPosition.x + 24 + j, drawStartPosition.y + i);
+                                        Console.Write("■");
+                                        totalPosition[count].x = drawStartPosition.x + 24 + j;
+                                        totalPosition[count].y = drawStartPosition.y + i;
+                                        count++;
                                     }
 
                                 }
                             }//不是最后一行,我们先判断是不是偶数行,偶数行生成一组□,不是的话生成头尾方块
                             else
                             {
-                                for (int j = 0; j < 24; j += 2)
+                                if (!isReversedOrder)
                                 {
+                                    for (int j = 0; j < 24; j += 2)
+                                    {
 
-                                    if (i % 2 == 0)
-                                    {
-                                        Console.SetCursorPosition(drawStartPosition.x + j, drawStartPosition.y + i);
-                                        Console.Write("□");
-                                        totalPosition[count].x = drawStartPosition.x + j;
-                                        totalPosition[count].y = drawStartPosition.y + i;
-                                        count++;
-                                    }
-                                    else if (j == 22 && !hasGenerate && !hasExecuted && i != 19)
-                                    {
-                                        Console.SetCursorPosition(drawStartPosition.x + j, drawStartPosition.y + i);
-                                        Console.Write("□");
-                                        totalPosition[count].x = drawStartPosition.x + j;
-                                        totalPosition[count].y = drawStartPosition.y + i;
-                                        count++;
-                                        hasGenerate = true;
-                                        hasExecuted = true;
-                                    }
-                                    else if (j == 0 && hasGenerate && !hasExecuted && i != 19)
-                                    {
-                                        Console.SetCursorPosition(drawStartPosition.x + j, drawStartPosition.y + i);
-                                        Console.Write("□");
-                                        totalPosition[count].x = drawStartPosition.x + j;
-                                        totalPosition[count].y = drawStartPosition.y + i;
-                                        count++;
-                                        hasGenerate = false;
-                                        hasExecuted = true;
+                                        if (i % 2 == 0)
+                                        {
+                                            Console.SetCursorPosition(drawStartPosition.x + j, drawStartPosition.y + i);
+                                            Console.Write("□");
+                                            totalPosition[count].x = drawStartPosition.x + j;
+                                            totalPosition[count].y = drawStartPosition.y + i;
+                                            count++;
+                                            isReversedOrder = true;
+                                        }
+                                        else if (j == 22 && !hasGenerate && !hasExecuted && i != 19)
+                                        {
+                                            Console.SetCursorPosition(drawStartPosition.x + j, drawStartPosition.y + i);
+                                            Console.Write("□");
+                                            totalPosition[count].x = drawStartPosition.x + j;
+                                            totalPosition[count].y = drawStartPosition.y + i;
+                                            count++;
+                                            hasGenerate = true;
+                                            hasExecuted = true;
+                                        }
+                                        else if (j == 0 && hasGenerate && !hasExecuted && i != 19)
+                                        {
+                                            Console.SetCursorPosition(drawStartPosition.x + j, drawStartPosition.y + i);
+                                            Console.Write("□");
+                                            totalPosition[count].x = drawStartPosition.x + j;
+                                            totalPosition[count].y = drawStartPosition.y + i;
+                                            count++;
+                                            hasGenerate = false;
+                                            hasExecuted = true;
+                                        }
+
                                     }
 
                                 }
+                                else
+                                {
+                                    for (int j = 22; j >= 0; j -= 2)
+                                    {
+
+                                        if (i % 2 == 0)
+                                        {
+                                            Console.SetCursorPosition(drawStartPosition.x + j, drawStartPosition.y + i);
+                                            Console.Write("□");
+                                            totalPosition[count].x = drawStartPosition.x + j;
+                                            totalPosition[count].y = drawStartPosition.y + i;
+                                            count++;
+                                            isReversedOrder = false;
+                                        }
+                                        else if (j == 22 && !hasGenerate && !hasExecuted && i != 19)
+                                        {
+                                            Console.SetCursorPosition(drawStartPosition.x + j, drawStartPosition.y + i);
+                                            Console.Write("□");
+                                            totalPosition[count].x = drawStartPosition.x + j;
+                                            totalPosition[count].y = drawStartPosition.y + i;
+                                            count++;
+                                            hasGenerate = true;
+                                            hasExecuted = true;
+                                        }
+                                        else if (j == 0 && hasGenerate && !hasExecuted && i != 19)
+                                        {
+                                            Console.SetCursorPosition(drawStartPosition.x + j, drawStartPosition.y + i);
+                                            Console.Write("□");
+                                            totalPosition[count].x = drawStartPosition.x + j;
+                                            totalPosition[count].y = drawStartPosition.y + i;
+                                            count++;
+                                            hasGenerate = false;
+                                            hasExecuted = true;
+                                        }
+
+                                    }
+                                }
+
                             }
                         }
                         #endregion
@@ -253,6 +303,10 @@
                             {
                                 case ConsoleKey.E:
                                     playerPosition += diceNumber;
+                                    if (playerPosition >= totalPosition.Length)
+                                    {
+                                        playerPosition = totalPosition.Length - 1;
+                                    }
                                     Console.SetCursorPosition(totalPosition[playerPosition].x, totalPosition[playerPosition].y);
                                     Console.Write("★");
                                     break;
