@@ -11,16 +11,21 @@ namespace 成员变量和访问修饰符
         public float height;
         public string homeAddress;
 
-        public Person(string name, int age, float height, string homeAddress)
+        public Person(string name, int age, float height, string homeAddress) : this(name)
         {
             this.name = name;
             this.age = age;
             this.height = height;
             this.homeAddress = homeAddress;
         }
-        public Person()
-        { }
-
+        public Person(string name)
+        {
+            this.name = name;
+        }
+        public Person(int age)
+        {
+            this.age = age;
+        }
         public void Speak()
         {
             Console.WriteLine("你好,我是{0},我今年{1}岁了,{2}米高,家庭地址是{3}", name, age, height, homeAddress);

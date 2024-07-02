@@ -5,9 +5,13 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "1.类和对象", "类和对象\1.类和对象.csproj", "{3FFBFA98-CC0D-4D81-9709-7B78A7D122AD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "成员变量和访问修饰符", "成员变量和访问修饰符\成员变量和访问修饰符.csproj", "{2ADEC218-2DB0-4691-B28F-233D262E90BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2.成员变量和访问修饰符", "成员变量和访问修饰符\2.成员变量和访问修饰符.csproj", "{2ADEC218-2DB0-4691-B28F-233D262E90BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "成员方法", "成员方法\成员方法.csproj", "{D08DECF8-8897-4969-9E9A-C56D59E1007C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3.成员方法", "成员方法\3.成员方法.csproj", "{D08DECF8-8897-4969-9E9A-C56D59E1007C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4.构造、析构、垃圾回收", "构造、析构、垃圾回收\4.构造、析构、垃圾回收.csproj", "{280C6A42-B843-45B5-9443-325215EB8000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5.成员属性", "5.成员属性\5.成员属性.csproj", "{C6F986B0-BC4B-4F41-BF98-E266E301A72C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{D08DECF8-8897-4969-9E9A-C56D59E1007C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D08DECF8-8897-4969-9E9A-C56D59E1007C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D08DECF8-8897-4969-9E9A-C56D59E1007C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{280C6A42-B843-45B5-9443-325215EB8000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{280C6A42-B843-45B5-9443-325215EB8000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{280C6A42-B843-45B5-9443-325215EB8000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{280C6A42-B843-45B5-9443-325215EB8000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6F986B0-BC4B-4F41-BF98-E266E301A72C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6F986B0-BC4B-4F41-BF98-E266E301A72C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6F986B0-BC4B-4F41-BF98-E266E301A72C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6F986B0-BC4B-4F41-BF98-E266E301A72C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
