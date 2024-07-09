@@ -91,7 +91,7 @@
         public void Speak()
         {
 
-            Console.WriteLine("你好我是{3},我今年{4}岁了,我是{0}的,我的平均分和总分分别是:{1},{2}", IsMale ? "男" : "女", (UnityScore + CSharpScore) / 2, UnityScore + CSharpScore, Name, Age);
+            Console.WriteLine("你好我是{3},我今年{4}岁了,我是{0}的,我的平均分:{1}总分是,{2}", IsMale ? "男" : "女", (float)(UnityScore + CSharpScore) / 2, UnityScore + CSharpScore, Name, Age);
         }
 
 
