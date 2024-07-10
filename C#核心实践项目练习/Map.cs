@@ -13,7 +13,7 @@ namespace C_核心实践项目练习
 
         public Map()
         {
-            int count = Game.width + Game.height * 2 - 2;
+            int count = Game.width + (Game.height - 1) * 2;
             walls = new Wall[count];
 
             for (int i = 0; i < Game.width; i += 2)

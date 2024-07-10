@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace C_核心实践项目练习
+﻿namespace C_核心实践项目练习
 {
     internal struct Position
     {
 
 
-        public int x { get; }
-        public int y { get; }
+        public int x { get; private set; }
+        public int y { get; private set; }
 
         public Position(int x, int y)
         {
@@ -43,5 +37,13 @@ namespace C_核心实践项目练习
             }
         }
 
+        public static Position operator +(Position a, (int x, int y) b)
+        {
+            return new Position(a.x + b.x, a.y + b.y);
+        }
+        public static Position operator -(Position a, (int x, int y) b)
+        {
+            return new Position(a.x - b.x, a.y - b.y);
+        }
     }
 }

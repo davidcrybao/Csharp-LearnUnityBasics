@@ -27,5 +27,11 @@ namespace C_核心实践项目练习
             Console.ForegroundColor = type == BodyType.Head ? ConsoleColor.Yellow : ConsoleColor.Green;
             Console.Write(type == BodyType.Head ? "●" : "○");
         }
+        public void Clear()
+        {
+            Console.SetCursorPosition(position.x, position.y);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("  ");
+        }
     }
 }
