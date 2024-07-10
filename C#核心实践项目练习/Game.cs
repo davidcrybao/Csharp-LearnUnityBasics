@@ -23,6 +23,7 @@ namespace C_核心实践项目练习
         public Game()
         {
             Initialize();
+            SwitchScene(Game_State.start);
         }
         public void Start()
         {

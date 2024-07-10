@@ -8,10 +8,18 @@ namespace C_核心实践项目练习
 {
     internal class GameScene : ISceneUpdate
     {
+        Map map;
+
+        public GameScene()
+        {
+            map = new Map();
+
+        }
+
         public void Update()
         {
-            Console.SetCursorPosition(0, 0);
-            Console.WriteLine("Game started");
+            map.Draw();
+
         }
     }
 }

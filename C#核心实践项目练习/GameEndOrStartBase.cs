@@ -28,7 +28,7 @@ namespace C_核心实践项目练习
             Console.SetCursorPosition(Game.width / 2 - 4, 11);
             Console.Write("游戏结束");
 
-            switch (Console.ReadKey().Key)
+            switch (Console.ReadKey(true).Key)
             {
                 case ConsoleKey.W:
                     currentChoice = 0;
