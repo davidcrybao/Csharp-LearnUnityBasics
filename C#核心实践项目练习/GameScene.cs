@@ -10,6 +10,7 @@ namespace C_核心实践项目练习
     {
         Map map;
         Snake snake;
+
         int updateCount;
 
         public GameScene()
@@ -25,6 +26,7 @@ namespace C_核心实践项目练习
             {
                 map.Draw();
 
+                snake.Clear();
                 snake.Move();
 
                 snake.Draw();

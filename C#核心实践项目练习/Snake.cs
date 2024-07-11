@@ -13,6 +13,8 @@ namespace C_核心实践项目练习
     internal class Snake : IDraw
     {
         SnakeBody[] snakeBodies;
+        FoodManager foodManager;
+        Random r;
         int eatCount;
         MoveDir moveDir;
         public Snake(int x, int y)
@@ -21,6 +23,9 @@ namespace C_核心实践项目练习
             snakeBodies[0] = new SnakeBody(BodyType.Head, x, y);
             moveDir = MoveDir.Right;
             eatCount = 1;
+            foodManager = new FoodManager();
+            r = new Random();
+            foodManager.GenerateFood(AvailablePosition());
         }
 
 
@@ -38,7 +43,6 @@ namespace C_核心实践项目练习
 
             int x = 0;
             int y = 0;
-            snakeBodies[0].Clear();
             switch (moveDir)
             {
                 case MoveDir.Up:
@@ -56,17 +60,86 @@ namespace C_核心实践项目练习
             }
 
             //移动的范围限制
+            if (snakeBodies[0].position == foodManager.foods[0].position)
+            {
+                Eat();
+            }
+
+            //倒序来完成会更好
+            for (int i = eatCount - 1; i > 0; i--)
+            {
+                snakeBodies[i].position = snakeBodies[i - 1].position;
+            }
+            snakeBodies[0].position += (x, y);
+
+            //跟着头移动  改变思维 后一个位置的坐标等于前面位置的坐标
 
 
-            //开始改变所有的坐标
+        }
+        public void Eat()
+        {
+            //等待修改TODO
+            //坐标有问题 我们是在最后一个的后面增加一个 是否需要判断上下左右?
+
+
+
+            switch (moveDir)
+            {
+                case MoveDir.Up:
+                    snakeBodies[eatCount] = new SnakeBody(BodyType.Body,
+              snakeBodies[eatCount - 1].position.x, snakeBodies[eatCount - 1].position.y + 1);
+                    break;
+                case MoveDir.Down:
+                    snakeBodies[eatCount] = new SnakeBody(BodyType.Body,
+            snakeBodies[eatCount - 1].position.x, snakeBodies[eatCount - 1].position.y - 1);
+                    break;
+                case MoveDir.Left:
+                    snakeBodies[eatCount] = new SnakeBody(BodyType.Body,
+            snakeBodies[eatCount - 1].position.x + 2, snakeBodies[eatCount - 1].position.y);
+                    break;
+                case MoveDir.Right:
+                    snakeBodies[eatCount] = new SnakeBody(BodyType.Body,
+snakeBodies[eatCount - 1].position.x - 2, snakeBodies[eatCount - 1].position.y);
+                    break;
+            }
+
+            //重新生成食物
+            foodManager.hasGenerate = false;
+            foodManager.GenerateFood(AvailablePosition());
+            eatCount++;
+        }
+        public Position AvailablePosition()
+        {
+            bool isAvailable = true;
+            Position temp = new Position();
+            do
+            {
+                temp = GenerateRandomPosition();
+                isAvailable = CheckCollision(temp);
+
+            } while (isAvailable);
+            return temp;
+
+        }
+        public Position GenerateRandomPosition()
+        {
+            int x = r.Next(2, Game.width / 2 - 2) * 2;
+            int y = r.Next(2, Game.height - 2);
+            return new Position(x, y);
+        }
+        public bool CheckCollision(Position position)
+        {
+
             for (int i = 0; i < eatCount; i++)
             {
-                snakeBodies[i].position += (x, y);
-
-
+                if (snakeBodies[i].position == position)
+                {
+                    return true;
+                }
             }
-        }
 
+            return false;
+        }
         public bool CheckCollision()
         {
             int width = Game.width - 4;
@@ -84,9 +157,9 @@ namespace C_核心实践项目练习
             }
 
             //头跟身体碰撞
-            if (eatCount >= 3)
+            if (eatCount >= 4)
             {
-                for (int i = eatCount; i > 2; i--)
+                for (int i = eatCount - 1; i > 3; i--)
                 {
                     if (snakeBodies[i].position == snakeHead)
                     {
@@ -173,7 +246,7 @@ namespace C_核心实践项目练习
         {
             for (int i = 0; i < eatCount; i++)
             {
-                snakeBodies[0].Clear();
+                snakeBodies[i].Clear();
             }
         }
     }
