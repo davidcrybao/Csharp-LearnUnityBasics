@@ -10,6 +10,7 @@ namespace C_核心实践项目练习
     {
         Map map;
         Snake snake;
+        int updateCount;
 
         public GameScene()
         {
@@ -20,10 +21,39 @@ namespace C_核心实践项目练习
 
         public void Update()
         {
-            map.Draw();
-            snake.Draw();
-            snake.Move();
+            if (updateCount % 10000 == 0)
+            {
+                map.Draw();
 
+                snake.Move();
+
+                snake.Draw();
+                if (snake.CheckCollision())
+                {
+                    Game.SwitchScene(Game_State.end);
+                }
+                updateCount = 0;
+            }
+            updateCount++;
+
+            if (Console.KeyAvailable)
+            {
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.W:
+                        snake.ChangeDir(MoveDir.Up);
+                        break;
+                    case ConsoleKey.S:
+                        snake.ChangeDir(MoveDir.Down);
+                        break;
+                    case ConsoleKey.A:
+                        snake.ChangeDir(MoveDir.Left);
+                        break;
+                    case ConsoleKey.D:
+                        snake.ChangeDir(MoveDir.Right);
+                        break;
+                }
+            }
         }
     }
 }
