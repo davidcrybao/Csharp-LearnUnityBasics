@@ -19,5 +19,6 @@ namespace C_核心实践项目练习
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("∮");
         }
+        //可以选择在食物里加个随机的位置 我目前使用的是食物管理 ,可以 保存多个食物
     }
 }

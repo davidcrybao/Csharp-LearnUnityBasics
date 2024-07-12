@@ -14,7 +14,6 @@ namespace C_核心实践项目练习
     {
         SnakeBody[] snakeBodies;
         FoodManager foodManager;
-        Random r;
         int eatCount;
         MoveDir moveDir;
         public Snake(int x, int y)
@@ -24,8 +23,8 @@ namespace C_核心实践项目练习
             moveDir = MoveDir.Right;
             eatCount = 1;
             foodManager = new FoodManager();
-            r = new Random();
-            foodManager.GenerateFood(AvailablePosition());
+            foodManager.GenerateFood(this);
+            foodManager.GenerateFood(this);
         }
 
 
@@ -59,29 +58,37 @@ namespace C_核心实践项目练习
                     break;
             }
 
-            //移动的范围限制
-            if (snakeBodies[0].position == foodManager.foods[0].position)
+            /*   for (int i = 0; i < foodManager.foods.Length; i++)
+               {
+                   if (snakeBodies[0].position == foodManager.foods[i].position)
+                   {
+                       Eat();
+                       foodManager.foods[i].position = new Position(0, 0);
+                       break;
+                   }
+               }
+   */
+            //
+            foodManager.foods[foodManager.currentFoodCount].Draw();
+            if (snakeBodies[0].position == foodManager.foods[foodManager.currentFoodCount].position)
             {
                 Eat();
+
             }
 
-            //倒序来完成会更好
+
+            // 移动蛇身体
             for (int i = eatCount - 1; i > 0; i--)
             {
                 snakeBodies[i].position = snakeBodies[i - 1].position;
             }
+            // 更新头部位置
             snakeBodies[0].position += (x, y);
-
-            //跟着头移动  改变思维 后一个位置的坐标等于前面位置的坐标
 
 
         }
         public void Eat()
         {
-            //等待修改TODO
-            //坐标有问题 我们是在最后一个的后面增加一个 是否需要判断上下左右?
-
-
 
             switch (moveDir)
             {
@@ -103,30 +110,17 @@ snakeBodies[eatCount - 1].position.x - 2, snakeBodies[eatCount - 1].position.y);
                     break;
             }
 
-            //重新生成食物
-            foodManager.hasGenerate = false;
-            foodManager.GenerateFood(AvailablePosition());
             eatCount++;
-        }
-        public Position AvailablePosition()
-        {
-            bool isAvailable = true;
-            Position temp = new Position();
-            do
-            {
-                temp = GenerateRandomPosition();
-                isAvailable = CheckCollision(temp);
-
-            } while (isAvailable);
-            return temp;
+            foodManager.GenerateFood(this);
+            foodManager.GenerateFood(this);
 
         }
-        public Position GenerateRandomPosition()
-        {
-            int x = r.Next(2, Game.width / 2 - 2) * 2;
-            int y = r.Next(2, Game.height - 2);
-            return new Position(x, y);
-        }
+
+        /// <summary>
+        /// 判断与一个位置是否重合
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public bool CheckCollision(Position position)
         {
 
@@ -145,7 +139,7 @@ snakeBodies[eatCount - 1].position.x - 2, snakeBodies[eatCount - 1].position.y);
             int width = Game.width - 4;
             int height = Game.height - 2;
 
-            //头跟墙壁碰撞
+            //头跟墙壁碰撞  不用去遍历墙壁数组
             Position snakeHead = snakeBodies[0].position;
             if (snakeHead.x > width | snakeHead.x < 2)
             {
@@ -156,8 +150,8 @@ snakeBodies[eatCount - 1].position.x - 2, snakeBodies[eatCount - 1].position.y);
                 return true;
             }
 
-            //头跟身体碰撞
-            if (eatCount >= 4)
+            //头跟身体碰撞 当身体>4的时候 (默认是1);
+            if (eatCount > 4)
             {
                 for (int i = eatCount - 1; i > 3; i--)
                 {
@@ -185,69 +179,12 @@ snakeBodies[eatCount - 1].position.x - 2, snakeBodies[eatCount - 1].position.y);
             this.moveDir = moveDir;
         }
 
-        /*   public void Move()
-           {
-               while (true)
-               {
-                   ConsoleKey input = Console.ReadKey(true).Key;
-                   //Clear();
-                   SnakeBody lastBody = snakeBodies[eatCount - 1];
-                   lastBody.Clear();
-                   ReSetPosition(input);
-
-                   Draw();
-               }
-           }
-   */
-
-
-        public void ReSetPosition(ConsoleKey key)
-        {
-            int x = 0;
-            int y = 0;
-            switch (key)
-            {
-                case ConsoleKey.W:
-                    y = -1; x = 0;
-                    break;
-                case ConsoleKey.S:
-                    y = 1; x = 0;
-                    break;
-                case ConsoleKey.A:
-                    x = -2; y = 0;
-                    break;
-                case ConsoleKey.D:
-                    x = 2; y = 0;
-                    break;
-            }
-
-            int width = Game.width - 4;
-            int height = Game.height - 2;
-
-            //这样会出现一个问题,身体越来越小,直接加个return?
-            for (int i = 0; i < eatCount; i++)
-            {
-                snakeBodies[i].position += (x, y);
-                if (snakeBodies[i].position.x > width || snakeBodies[i].position.x < 2)
-                {
-                    snakeBodies[i].position -= (x, 0);
-                    return;
-                }
-                else if (snakeBodies[i].position.y > height || snakeBodies[i].position.y < 1)
-                {
-                    snakeBodies[i].position -= (0, y);
-                    return;
-                }
-
-            }
-
-        }
         public void Clear()
         {
-            for (int i = 0; i < eatCount; i++)
-            {
-                snakeBodies[i].Clear();
-            }
+            //清除头尾即可,不需要遍历循环-----擦除屁股就行了....
+            // snakeBodies[0].Clear();
+            snakeBodies[eatCount - 1].Clear();
+
         }
     }
 }

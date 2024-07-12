@@ -34,6 +34,7 @@ namespace C_核心实践项目练习
                 {
                     Game.SwitchScene(Game_State.end);
                 }
+
                 updateCount = 0;
             }
             updateCount++;
