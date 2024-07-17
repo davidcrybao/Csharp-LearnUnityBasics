@@ -94,6 +94,51 @@ namespace C_进阶学习
             packBag.Sell(n1);
             packBag.Sell(n1);
 
+            ArrayList fiveScore = [80, 70,"56",95,60,"213",465,];
+/*            int temp = 0;
+            foreach (var item in fiveScore)
+            {
+                temp +=(int) item;
+            }
+            Console.WriteLine("平均分数是{0}",temp/5);
+            Console.WriteLine(fiveScore[0].GetType());*/
+
+            ArrayList newList = ReturnNewArrayListt(fiveScore);
+            foreach (var item in newList)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+        public static ArrayList ReturnNewArrayListt(ArrayList arrayList)
+        {
+            for (int i = arrayList.Count-1; i >0; i--)
+            {
+                if (arrayList[i] is int)
+                {
+
+                }
+                else
+                {
+                    arrayList.RemoveAt(i);
+                }
+            }
+            return arrayList;
+        }
+
+        public static ArrayList ReturnNewArrayList(ArrayList arrayList)
+        {
+            ArrayList newList = new ArrayList();
+            foreach (var item in arrayList)
+            {
+                if (item is int)
+                {
+                    newList.Add(item);
+                }
+            }
+            return newList;
         }
     }
+
+ 
 }
