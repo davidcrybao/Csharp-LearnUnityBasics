@@ -11,9 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3.Queue", "3.Queue\3.Queue.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4.0HashTable学习", "4.0HashTable学习\4.0HashTable学习.csproj", "{1C537212-817E-4816-93A0-DA9F098A24CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5.0泛型使用", "5.0泛型使用\5.0泛型使用.csproj", "{2CF0F32B-6520-4F4E-88F1-A1F2735EFA62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5.0泛型使用", "5.0泛型使用\5.0泛型使用.csproj", "{2CF0F32B-6520-4F4E-88F1-A1F2735EFA62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6.0泛型约束", "6.0泛型约束\6.0泛型约束.csproj", "{9619538D-5A8B-4BC4-9462-DE52DAC45DED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "6.0泛型约束", "6.0泛型约束\6.0泛型约束.csproj", "{9619538D-5A8B-4BC4-9462-DE52DAC45DED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7.0 List的学习", "7.0 List的学习\7.0 List的学习.csproj", "{67BD719C-D978-4008-BA43-2DA3B9857F0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8.0 Dictionary学习", "8.0 Dictionary学习\8.0 Dictionary学习.csproj", "{5D146B65-E68F-482A-9142-28D054CA1D43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9.0顺序存储和链式存储", "9.0顺序存储和链式存储\9.0顺序存储和链式存储.csproj", "{1E39EA32-3337-497C-B0E6-58565BEDE1E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +51,18 @@ Global
 		{9619538D-5A8B-4BC4-9462-DE52DAC45DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9619538D-5A8B-4BC4-9462-DE52DAC45DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9619538D-5A8B-4BC4-9462-DE52DAC45DED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67BD719C-D978-4008-BA43-2DA3B9857F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67BD719C-D978-4008-BA43-2DA3B9857F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67BD719C-D978-4008-BA43-2DA3B9857F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67BD719C-D978-4008-BA43-2DA3B9857F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D146B65-E68F-482A-9142-28D054CA1D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D146B65-E68F-482A-9142-28D054CA1D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D146B65-E68F-482A-9142-28D054CA1D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D146B65-E68F-482A-9142-28D054CA1D43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E39EA32-3337-497C-B0E6-58565BEDE1E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E39EA32-3337-497C-B0E6-58565BEDE1E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E39EA32-3337-497C-B0E6-58565BEDE1E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E39EA32-3337-497C-B0E6-58565BEDE1E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
