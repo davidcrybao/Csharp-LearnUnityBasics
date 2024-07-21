@@ -15,11 +15,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5.0泛型使用", "5.0泛�
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "6.0泛型约束", "6.0泛型约束\6.0泛型约束.csproj", "{9619538D-5A8B-4BC4-9462-DE52DAC45DED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7.0 List的学习", "7.0 List的学习\7.0 List的学习.csproj", "{67BD719C-D978-4008-BA43-2DA3B9857F0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "7.0 List的学习", "7.0 List的学习\7.0 List的学习.csproj", "{67BD719C-D978-4008-BA43-2DA3B9857F0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8.0 Dictionary学习", "8.0 Dictionary学习\8.0 Dictionary学习.csproj", "{5D146B65-E68F-482A-9142-28D054CA1D43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "8.0 Dictionary学习", "8.0 Dictionary学习\8.0 Dictionary学习.csproj", "{5D146B65-E68F-482A-9142-28D054CA1D43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9.0顺序存储和链式存储", "9.0顺序存储和链式存储\9.0顺序存储和链式存储.csproj", "{1E39EA32-3337-497C-B0E6-58565BEDE1E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "9.00顺序存储和链式存储", "9.0顺序存储和链式存储\9.00顺序存储和链式存储.csproj", "{1E39EA32-3337-497C-B0E6-58565BEDE1E4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "9.01 LinkedList学习", "9.01 LinkedList学习\9.01 LinkedList学习.csproj", "{5711E9DF-B003-43C3-A194-A33042EEE53B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "9.02委托Delegate", "9.02委托Delegate\9.02委托Delegate.csproj", "{ECA602BE-8E85-4EB8-90B2-6CA7CF2F777D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "9.03事件-与委托的差异", "9.03事件-与委托的差异\9.03事件-与委托的差异.csproj", "{18051408-87E0-400C-B47B-54C328E93AF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9.04匿名函数", "9.04匿名函数\9.04匿名函数.csproj", "{C5F4BED1-037C-4000-9264-838BE530620B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9.05lambda表达式的学习", "9.05lambda表达式的学习\9.05lambda表达式的学习.csproj", "{6F700E41-777E-4536-9610-A5FD9268CEFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9.06 list排序", "9.06 list排序\9.06 list排序.csproj", "{799579F5-B136-45E0-97E7-D3655FB12EBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +75,30 @@ Global
 		{1E39EA32-3337-497C-B0E6-58565BEDE1E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E39EA32-3337-497C-B0E6-58565BEDE1E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E39EA32-3337-497C-B0E6-58565BEDE1E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5711E9DF-B003-43C3-A194-A33042EEE53B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5711E9DF-B003-43C3-A194-A33042EEE53B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5711E9DF-B003-43C3-A194-A33042EEE53B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5711E9DF-B003-43C3-A194-A33042EEE53B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECA602BE-8E85-4EB8-90B2-6CA7CF2F777D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECA602BE-8E85-4EB8-90B2-6CA7CF2F777D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECA602BE-8E85-4EB8-90B2-6CA7CF2F777D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECA602BE-8E85-4EB8-90B2-6CA7CF2F777D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18051408-87E0-400C-B47B-54C328E93AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18051408-87E0-400C-B47B-54C328E93AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18051408-87E0-400C-B47B-54C328E93AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18051408-87E0-400C-B47B-54C328E93AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5F4BED1-037C-4000-9264-838BE530620B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5F4BED1-037C-4000-9264-838BE530620B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5F4BED1-037C-4000-9264-838BE530620B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5F4BED1-037C-4000-9264-838BE530620B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F700E41-777E-4536-9610-A5FD9268CEFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F700E41-777E-4536-9610-A5FD9268CEFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F700E41-777E-4536-9610-A5FD9268CEFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F700E41-777E-4536-9610-A5FD9268CEFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{799579F5-B136-45E0-97E7-D3655FB12EBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{799579F5-B136-45E0-97E7-D3655FB12EBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{799579F5-B136-45E0-97E7-D3655FB12EBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{799579F5-B136-45E0-97E7-D3655FB12EBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
