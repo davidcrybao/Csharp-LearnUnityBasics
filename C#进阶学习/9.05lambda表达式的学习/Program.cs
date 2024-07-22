@@ -11,7 +11,11 @@
             Action<int> action2 = (value) => { Console.WriteLine(value); };  
             action2(222);
             Action<int> action3 = (value) => Console.WriteLine(value);
-            action3(333);
+            action3(333); 
+            Action<int> action4 = Console.WriteLine;
+            action4(444);
+
+
             Func<int> func1 = () => { return 25; };
             Console.WriteLine(func1());
             Func<int,string> func2 = (int x) => { return (x*520+"this is ").ToString(); };
