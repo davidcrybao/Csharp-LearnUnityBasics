@@ -48,9 +48,9 @@ namespace _9._11关键类Assembly和Activator
             MethodInfo draw = player.GetMethod("Draw");    
             MethodInfo clear = player.GetMethod("Clear");
 
-            draw.Invoke(playerObj, null); 
+            draw?.Invoke(playerObj, null); 
             Console.ReadKey();
-            clear.Invoke(playerObj, null);
+            clear?.Invoke(playerObj, null);
 
         }
     }
