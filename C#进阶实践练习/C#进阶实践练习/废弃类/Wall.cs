@@ -9,9 +9,9 @@ namespace C_进阶实践练习
     /// <summary>
     /// 废弃类
     /// </summary>
-    internal class Wall : DrawObject
+    internal class Wall
     {
-        public Wall(E_DrawType drawType) : base(drawType)
+    /*    public Wall(E_DrawType drawType) : base(drawType)
         {
         }
 
@@ -20,6 +20,6 @@ namespace C_进阶实践练习
             Console.SetCursorPosition(position.x, position.y);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("■");
-        }
+        }*/
     }
 }

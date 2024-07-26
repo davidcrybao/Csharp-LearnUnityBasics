@@ -22,15 +22,15 @@ namespace C_进阶实践练习
             int count = (GameManager.height-2) * 2 +GameManager.width/2;
             for (int i = 0; i < GameManager.height-2; i++)
             {
-                walls.Add(new DrawObject(0, i,E_DrawType.Wall));
+                walls.Add(new DrawObject(0, i,E_CubeTypes.Wall));
             }
             for (int i = 0; i < GameManager.height-2; i++)
             {
-                walls.Add( new DrawObject(GameManager.width-2, i, E_DrawType.Wall));
+                walls.Add( new DrawObject(GameManager.width-2, i, E_CubeTypes.Wall));
             }
             for (int i = 0; i < GameManager.width; i+=2)
             {
-                walls.Add(new DrawObject(i, GameManager.height - 3, E_DrawType.Wall));
+                walls.Add(new DrawObject(i, GameManager.height - 3, E_CubeTypes.Wall));
             }
         }
 

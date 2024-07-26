@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 
 namespace C_进阶实践练习
 {
+    internal enum E_CubeTypes
+    {
+        Wall,
+        O_piece,
+        T_Piece,
+        L_piece, J_piece,
+        I_piece,
+        S_piece, Z_piece,
+    }
     internal enum E_DrawType
     {
         /// <summary>
@@ -52,14 +61,14 @@ namespace C_进阶实践练习
     internal class DrawObject : IDraw
     {
         public Position position;
-        public E_DrawType type;
+        public E_CubeTypes type;
 
-        public DrawObject(E_DrawType drawType)
+        public DrawObject(E_CubeTypes e_CubeTypes)
         {
-            type = drawType;
+            type = e_CubeTypes;
         }
 
-        public DrawObject(int x, int y, E_DrawType type) : this(type)
+        public DrawObject(int x, int y, E_CubeTypes type) : this(type)
         {
             position = new Position(x, y);
         }
@@ -70,29 +79,29 @@ namespace C_进阶实践练习
 
             switch (type)
             {
-                case E_DrawType.Wall:
+                case E_CubeTypes.Wall:
                     Console.ForegroundColor = ConsoleColor.Red;
                     break;
 
-                case E_DrawType.Cube:
+                case E_CubeTypes.O_piece:
                     Console.ForegroundColor = ConsoleColor.Blue;
                     break;
 
-                case E_DrawType.Line:
+                case E_CubeTypes.I_piece:
                     Console.ForegroundColor = ConsoleColor.Green;
                     break;
 
-                case E_DrawType.Tank:
+                case E_CubeTypes.T_Piece:
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     break;
 
-                case E_DrawType.Left_Ladder:
-                case E_DrawType.Right_Ladder:
+                case E_CubeTypes.S_piece:
+                case E_CubeTypes.Z_piece:
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     break;
 
-                case E_DrawType.Left_Long_Ladder:
-                case E_DrawType.Right_Long_Ladder:
+                case E_CubeTypes.L_piece:
+                case E_CubeTypes.J_piece:
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     break;
             }
@@ -103,7 +112,7 @@ namespace C_进阶实践练习
         /// 当我们不是Wall的方块跟墙壁接触的时候,把这个方块改成我们墙壁类型
         /// </summary>
         /// <param name="type"></param>
-        public void ChangeType(E_DrawType type)
+        public void ChangeType(E_CubeTypes type)
         {
             this.type = type;
         }
