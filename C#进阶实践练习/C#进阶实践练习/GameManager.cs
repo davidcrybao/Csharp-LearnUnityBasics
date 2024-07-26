@@ -6,24 +6,30 @@ using System.Threading.Tasks;
 
 namespace C_进阶实践练习
 {
-    enum Game_State
-    { 
-        begin,gaming,end,
+    internal enum Game_State
+    {
+        begin, gaming, end,
     }
+
     internal class GameManager
     {
         public const int height = 40;
         public const int width = 90;
 
         public static ISceneUpdate nowScene;
+
         public GameManager()
         {
             Initialize();
-            SwitchScene(Game_State.gaming);
+            SwitchScene(Game_State.begin);
         }
+
         public void Start()
         {
-            nowScene?.Update();
+            while (true)
+            {
+                nowScene?.Update();
+            }
         }
 
         private void Initialize()
@@ -32,24 +38,25 @@ namespace C_进阶实践练习
             Console.SetWindowSize(width, height);
             Console.SetBufferSize(width, height);
             Console.CursorVisible = false;
-
         }
+
         public static void SwitchScene(Game_State game_State)
         {
             Console.Clear();
             switch (game_State)
             {
                 case Game_State.begin:
-                  //  nowScene = new GameStartScene();
+                    nowScene = new GameBeginScene();
                     break;
+
                 case Game_State.gaming:
                     nowScene = new GameScene();
                     break;
+
                 case Game_State.end:
-                   // nowScene = new GameEndScene();
+                    nowScene = new GameEndScene();
                     break;
             }
         }
-
     }
 }
