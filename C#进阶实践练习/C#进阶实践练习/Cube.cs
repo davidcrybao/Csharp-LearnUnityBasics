@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace C_进阶实践练习
 {
-    internal class Wall : GameObject
+    internal class Cube : DrawObject
     {
-        public Wall(int x,int y)
+      //  ConsoleColor consoleColor;
+        public Cube(int x,int y)
         {
             position = new Position(x, y);
         }
         public override void Draw()
         {
             Console.SetCursorPosition(position.x, position.y);
-            Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("■");
         }
     }

@@ -9,43 +9,39 @@ namespace C_进阶实践练习
 {
     internal class Map : IDraw
     {
-        public Wall[] walls;
-        public int currentWallIndex = 0;
-        public Wall[] dynamicWalls;
-        public int dynWallNumber = 0;
+
+        //用List更好些?
+        private List<DrawObject> walls = new List<DrawObject>();
+        public List<DrawObject> dynamicWalls = new List<DrawObject>();
+
 
         public Dictionary<int, int> perCubes = new Dictionary<int, int>();
 
         public Map()
         {
             int count = (GameManager.height-2) * 2 +GameManager.width/2;
-            walls = new Wall[count];
-            dynamicWalls = new Wall[200];
             for (int i = 0; i < GameManager.height-2; i++)
             {
-                walls[currentWallIndex] = new Wall(0, i);
-                currentWallIndex++;
+                walls.Add(new DrawObject(0, i,E_DrawType.Wall));
             }
             for (int i = 0; i < GameManager.height-2; i++)
             {
-                walls[currentWallIndex] = new Wall(GameManager.width-2, i);
-                currentWallIndex++;
+                walls.Add( new DrawObject(GameManager.width-2, i, E_DrawType.Wall));
             }
             for (int i = 0; i < GameManager.width; i+=2)
             {
-                walls[currentWallIndex] = new Wall(i, GameManager.height - 3);
-                currentWallIndex++;
+                walls.Add(new DrawObject(i, GameManager.height - 3, E_DrawType.Wall));
             }
         }
 
         public void Draw()
         {
-            for (int i = 0; i < walls.Length; i++)
+            for (int i = 0; i < walls.Count; i++)
             {
                 walls[i].Draw();
             }
 
-            for (int i = 0; i < dynWallNumber; i++)
+            for (int i = 0; i < dynamicWalls.Count; i++)
             {
                 dynamicWalls[i].Draw();
             }
