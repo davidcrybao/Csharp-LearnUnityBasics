@@ -45,7 +45,7 @@
         {
             Random r = new Random();
             //0是wall不考虑,得一个随机的类型
-            int typeIndex = r.Next(1, 2);
+            int typeIndex = r.Next(1, 8);
 
             E_CubeTypes type = (E_CubeTypes)typeIndex;
 
@@ -120,23 +120,25 @@
         public void Move(E_MoveDirection moveDirection)
         {
             Clear();
+            //这里修改过,也可以使用
+            Position positionOfffset = new Position();
             switch (moveDirection)
             {
                 case E_MoveDirection.Right:
-                    currentDraws[0].position.x += 2;
+                    positionOfffset = new Position(2, 0);
                     break;
 
                 case E_MoveDirection.Left:
-                    currentDraws[0].position.x -= 2;
+                    positionOfffset = new Position(-2, 0);
                     break;
 
                 case E_MoveDirection.Down:
-                    currentDraws[0].position.y++;
+                    positionOfffset = new Position(0, 1);
                     break;
             }
-            for (int i = 0; i < position.Length; i++)
+            for (int i = 0; i < currentDraws.Count; i++)
             {
-                currentDraws[i + 1].position = currentDraws[0].position + position[i];
+                currentDraws[i].position += positionOfffset;
             }
             Draw();
         }

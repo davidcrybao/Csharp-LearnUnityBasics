@@ -70,7 +70,7 @@
                 {
                     tetrisHandler.Move(E_MoveDirection.Down);
                 }
-                else //执行clear逻辑?
+                else //只有MoveDown的时候判断
                 {
                     map.Add(tetrisHandler.GetCurrentDraws());
                     tetrisHandler.GetRandomCube();

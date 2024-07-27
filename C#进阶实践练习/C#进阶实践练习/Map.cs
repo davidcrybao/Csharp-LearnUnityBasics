@@ -49,6 +49,8 @@ namespace C_进阶实践练习
 
         public void Add(List<DrawObject> drawObject)
         {
+            ClearDraw();
+
             foreach (var obj in drawObject)
             {
                 obj.ChangeType(E_CubeTypes.Wall);
@@ -60,8 +62,7 @@ namespace C_进阶实践练习
                     nowGameScene.StopThread();
                     break;
                 }
-
-                if (perCubes.ContainsKey(obj.position.y))
+                else if (perCubes.ContainsKey(obj.position.y))
                 {
                     perCubes[obj.position.y]++;
                 }
@@ -71,11 +72,13 @@ namespace C_进阶实践练习
                 }
             }
 
-            ClearDraw();
             List<int> linesToRemove = CheckAllLines();
-            foreach (var lineIndex in linesToRemove)
+            if (linesToRemove.Count>0)
             {
-                ClearDynamicWall(lineIndex);
+                foreach (var lineIndex in linesToRemove)
+                {
+                    ClearDynamicWall(lineIndex);
+                }
             }
 
             Draw();
@@ -111,40 +114,31 @@ namespace C_进阶实践练习
             }
 
             // 更新 perCubes 字典
-            if (perCubes.ContainsKey(lineIndex))
+            var updatedPerCubes = new Dictionary<int, int>();
+            foreach (var kvp in perCubes)
             {
-                perCubes.Remove(lineIndex);
-            }
-
-            List<int> keys = new List<int>(perCubes.Keys);
-            keys.Sort();
-            foreach (var key in keys)
-            {
-                if (key > lineIndex)
+                if (kvp.Key == lineIndex)
                 {
-                    break;
+                    continue;
                 }
-
-                int newValue = perCubes.ContainsKey(key + 1) ? perCubes[key + 1] : 0;
-                if (newValue == 0)
+                var newKey = kvp.Key < lineIndex ? kvp.Key + 1 : kvp.Key;
+                if (updatedPerCubes.ContainsKey(newKey))
                 {
-                    perCubes.Remove(key);
+                    updatedPerCubes[newKey] += kvp.Value;
                 }
                 else
                 {
-                    perCubes[key] = newValue;
+                    updatedPerCubes[newKey] = kvp.Value;
                 }
             }
+            perCubes = updatedPerCubes;
 
-            foreach (var dynamicWall in dynamicWalls)
-            {
-                dynamicWall.Draw();
-            }
 
             // 更新分数
             Console.SetCursorPosition(0, GameManager.height - 2);
             score += 5;
-            Console.Write("                    ", score);
+            Console.Write("                          ", score);
+            Console.SetCursorPosition(0, GameManager.height - 2);
             Console.Write("当前分数为{0}", score);
         }
     }
