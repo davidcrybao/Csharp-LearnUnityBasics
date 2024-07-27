@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -75,6 +76,8 @@ namespace C_进阶实践练习
 
         public void Draw()
         {
+            if (position.y<0) return;
+
             Console.SetCursorPosition(position.x, position.y);
 
             switch (type)
@@ -108,6 +111,12 @@ namespace C_进阶实践练习
             Console.Write("■");
         }
 
+        public void Clear()
+        {
+            if (position.y < 0) return;
+            Console.SetCursorPosition(position.x, position.y);
+            Console.Write("  ");
+        }
         /// <summary>
         /// 当我们不是Wall的方块跟墙壁接触的时候,把这个方块改成我们墙壁类型
         /// </summary>
@@ -115,6 +124,11 @@ namespace C_进阶实践练习
         public void ChangeType(E_CubeTypes type)
         {
             this.type = type;
+        }
+
+        public DrawObject Clone()
+        {
+            return new DrawObject(position.x, position.y, type);
         }
     }
 }

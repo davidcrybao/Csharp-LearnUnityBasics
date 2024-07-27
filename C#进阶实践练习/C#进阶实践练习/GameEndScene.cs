@@ -10,7 +10,7 @@ namespace C_进阶实践练习
     {
         public GameEndScene()
         {
-            title = "Game Over";
+            title = "游戏结束了";
             firstOption = "回到主菜单";
         }
 
