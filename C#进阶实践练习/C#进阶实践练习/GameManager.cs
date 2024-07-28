@@ -14,7 +14,7 @@ namespace C_进阶实践练习
     internal class GameManager
     {
         public const int height = 40;
-        public const int width = 90;
+        public const int width = 40;
 
         public static ISceneUpdate nowScene;
 
