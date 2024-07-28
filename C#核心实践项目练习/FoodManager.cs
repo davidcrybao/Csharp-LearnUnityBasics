@@ -10,37 +10,30 @@ namespace C_核心实践项目练习
     {
         public Food[] foods;
         public int currentFoodCount = 0;
-        Random r;
+        private Random r;
+
         public FoodManager()
         {
             r = new Random();
             // 1~2个食物
             foods = new Food[2];
-
         }
-
 
         public void GenerateFood(Snake snake)
         {
-            currentFoodCount++;
+            if (currentFoodCount >= foods.Length)
+            {
+                return; // 防止数组越界
+            }
             Position position = GenerateAvailableRandomPosition(snake);
-            if (currentFoodCount <= 1)
-            {
-                foods[currentFoodCount] = new Food(position.x, position.y);
 
-            }
-            else
-            {
-                currentFoodCount = 0;
-                foods[currentFoodCount] = new Food(position.x, position.y);
-
-            }
+            foods[currentFoodCount] = new Food(position.x, position.y);
             foods[currentFoodCount].Draw();
-
+            currentFoodCount++;
         }
+
         public Position GenerateAvailableRandomPosition(Snake snake)
         {
-
             int x = r.Next(2, Game.width / 2 - 2) * 2;
             int y = r.Next(2, Game.height - 2);
 
@@ -48,12 +41,18 @@ namespace C_核心实践项目练习
             //改成void 然后内循环 是不是可以更简便些?
             if (snake.CheckCollision(temp))
             {
-
                 GenerateAvailableRandomPosition(snake);
             }
             return new Position(x, y);
             //
-
+        }
+        public void RemoveFoodAt(int index)
+        {
+            for (int i = index; i < currentFoodCount - 1; i++)
+            {
+                foods[i] = foods[i + 1];
+            }
+            currentFoodCount--;
         }
     }
 }

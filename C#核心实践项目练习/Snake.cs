@@ -68,16 +68,20 @@ namespace C_核心实践项目练习
                    }
                }
    */
-            //
-            foodManager.foods[foodManager.currentFoodCount].Draw();
-            if (snakeBodies[0].position == foodManager.foods[foodManager.currentFoodCount].position)
+            //错误的代码 实际上是不需要的
+            // foodManager.foods[foodManager.currentFoodCount].Draw();
+            //判断移动之后的位置是否 
+            for (int i = 0; i <foodManager.currentFoodCount; i++)
             {
-                Eat();
-
+                if (snakeBodies[0].position == foodManager.foods[i].position)
+                {
+                    Eat(i);
+                    break;
+                }
             }
 
 
-            // 移动蛇身体
+            // 移动蛇身体的位置
             for (int i = eatCount - 1; i > 0; i--)
             {
                 snakeBodies[i].position = snakeBodies[i - 1].position;
@@ -87,7 +91,7 @@ namespace C_核心实践项目练习
 
 
         }
-        public void Eat()
+        public void Eat(int foodIndex)
         {
 
             switch (moveDir)
@@ -111,8 +115,9 @@ snakeBodies[eatCount - 1].position.x - 2, snakeBodies[eatCount - 1].position.y);
             }
 
             eatCount++;
+            foodManager.RemoveFoodAt(foodIndex);
             foodManager.GenerateFood(this);
-            foodManager.GenerateFood(this);
+
 
         }
 
